@@ -24,15 +24,36 @@ class vector
 		}
 		vector(const vector& rhs) : _size(rhs._size), _capacity(rhs._capacity), _array(new int[_capacity])
 		{
-			for (int i = 0; i < rhs.size(); ++i)
+			for (int i = 0; i < rhs.Size(); ++i)
 			{
 				_array[i] = rhs._array[i];
 			}
 		}
-		// vector operator=(vector &rhs);
+
+		// vector(const std::initilaizer_list<int>& list) : _size(0), _capacity(list.Size() + 5), _array(new int[_capacity])
+		// {
+		// 	for (int i = 0; i < list.Size(); ++i)
+		// 		push_back(i);
+		// }
+
+		vector& operator=(const vector &rhs)
+		{
+			this->_size = rhs._size;
+			this->_capacity = rhs._capacity;
+			this->_array = new int[_capacity];
+			std::cout << "rhs.Size() " << rhs.Size() << std::endl;
+			for (int i = 0; i < rhs.Size(); ++i)
+			{
+				_array[i] = rhs._array[i];
+			}
+			return (*this);
+		}
+
 		~vector(void)
 		{
-			delete[] _array;
+			std::cout << "size: " << this->_size << " capacity: " << _capacity << std::endl;
+			if (_size > 0)
+				delete[] _array;
 		}
 
 	private:
@@ -45,7 +66,7 @@ class vector
 		void push_back(int value)
 		{ 
 			// TODO: what if filled?
-			std::cout << "push_back(" << value << ")" << std::endl;
+			// std::cout << "push_back(" << value << ")" << std::endl;
 			_array[_size] = value;
 			_size++;
 		}
@@ -78,6 +99,17 @@ class vector
 		bool operator!=(const vector& rhs) const
 		{
 			return !(*this == rhs);
+		}
+
+		friend std::ostream& operator<<(std::ostream& ostr, const vector& rhs)
+		{
+			for (int i = 0; i < rhs._size; ++i)
+				ostr << rhs._array[i] << " ";
+			ostr << " | | ";
+			for (int i = rhs._size; i < rhs._capacity; ++i)
+				ostr << rhs._array[i] << " ";
+			ostr << std::endl;
+			return (ostr);
 		}
 };
 
