@@ -24,7 +24,7 @@ class vector
 		}
 		vector(const vector& rhs) : _size(rhs._size), _capacity(rhs._capacity), _array(new int[_capacity])
 		{
-			for (int i = 0; i < rhs.Size(); ++i)
+			for (int i = 0; i < rhs.Size(); i++)
 			{
 				_array[i] = rhs._array[i];
 			}
@@ -38,10 +38,10 @@ class vector
 
 		vector& operator=(const vector &rhs)
 		{
+			delete[] _array;
 			this->_size = rhs._size;
 			this->_capacity = rhs._capacity;
 			this->_array = new int[_capacity];
-			std::cout << "rhs.Size() " << rhs.Size() << std::endl;
 			for (int i = 0; i < rhs.Size(); ++i)
 			{
 				_array[i] = rhs._array[i];
@@ -52,7 +52,7 @@ class vector
 		~vector(void)
 		{
 			std::cout << "size: " << this->_size << " capacity: " << _capacity << std::endl;
-			if (_size > 0)
+			if (_capacity > 0)
 				delete[] _array;
 		}
 
@@ -67,8 +67,16 @@ class vector
 		{ 
 			// TODO: what if filled?
 			// std::cout << "push_back(" << value << ")" << std::endl;
-			_array[_size] = value;
-			_size++;
+			if (_size < _capacity)
+			{
+				_array[_size] = value;
+				_size++;
+			}
+			else
+			{
+				_capacity *= 2;
+				int *newArray = new int[_capacity];
+			}
 		}
 
 		bool Empty(void) const
