@@ -12,10 +12,13 @@ template<typename T>
 class vector
 {
 	public:
+		//default constructor
 		vector(void) : _size(0), _capacity(10), _array(new int[_capacity])
 		{
 			//nothing here...
 		}
+
+		//default constructor with elements
 		vector(int elements, int value = 0) : _size(elements), _capacity(elements + 5), _array(new int[_capacity])
 		{
 			for (int i = 0; i < size(); ++i)
@@ -23,6 +26,8 @@ class vector
 				_array[i] = value;
 			}
 		}
+
+		//copy constructor
 		vector(const vector& rhs) : _size(rhs._size), _capacity(rhs._capacity), _array(new int[_capacity])
 		{
 			for (int i = 0; i < rhs.size(); ++i)
@@ -31,12 +36,7 @@ class vector
 			}
 		}
 
-		// vector(const std::initilaizer_list<int>& list) : _size(0), _capacity(list.size() + 5), _array(new int[_capacity])
-		// {
-		// 	for (int i = 0; i < list.size(); ++i)
-		// 		push_back(i);
-		// }
-
+		//copy assigment operator overload
 		vector& operator=(const vector &rhs)
 		{
 			if (rhs._size > _size)
@@ -52,15 +52,17 @@ class vector
 			this->_size = rhs._size;
 			return (*this);
 		}
-
+		//[] operator overload
 		int& operator[](int index)
 		{
 			return (_array[index]);
 		}
+
 		int& front()
 		{
 			return (_array[0]);
 		}
+
 		int& back()
 		{
 			return (_array[_size - 1]);
@@ -69,11 +71,7 @@ class vector
 		void insert(int index, int value)
 		{
 			if ((index < 0) || (index >= _size))
-			{
-				std::cerr << "Insert - Index out of Range" << std::endl;
-				return ;
-				// throw (Exception);
-			}
+				throw std::out_of_range("Insert - Index out of range");
 			if (_size != _capacity)
 			{
 				for (int i = _size - 1; i >= index; --i)
@@ -93,14 +91,10 @@ class vector
 			}
 		}
 
-		void ersase(int index)
+		void erase(int index)
 		{
 			if ((index < 0) || (index >= _size))
-			{
-				std::cerr << "Erase - Index out of Range" << std::endl;
-				return ;
-				// throw (Exception);
-			}
+				throw std::out_of_range("Erase - Index out of range");
 			for (int i = index; i < _size - 1; ++i)
 				_array[i] = _array[i + 1];
 			--_size;
@@ -148,12 +142,9 @@ class vector
 		void pop_back(void)
 		{
 			if (_size == 0)
-			{
-				std::cerr << "pop back on empty vector" << std::endl;
-				return ;
-				// throw PoppingBackEmptyVector();
-			}
+				throw std::out_of_range("Poping back on empty vector");
 			--_size;
+			//this->erase(this->_end - 1);
 		}
 
 		bool empty(void) const
@@ -185,15 +176,6 @@ class vector
 		{
 			return !(*this == rhs);
 		}
-
-		class PoppingBackEmptyVector : std::exception
-		{
-			public:
-				virtual const char* what() const throw()
-				{
-					return ("Pop back an empty vector!");
-				}
-		};
 
 		friend std::ostream& operator<<(std::ostream& ostr, const vector& rhs)
 		{
