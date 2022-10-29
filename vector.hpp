@@ -3,15 +3,29 @@
 
 #include <iostream>
 #include <exception>
+#include <memory>
 
 //https://www.youtube.com/watch?v=YpNCBw-cPWw
 
 namespace ft {
 
-template<typename T>
+template<typename T, typename Alloc = std::allocator<T> >
 class vector
 {
 	public:
+		typedef T value_type;
+		typedef Alloc allocator_type;
+		typedef typename allocator_type::reference reference;
+		typedef typename allocator_type::const_reference const_reference;
+		typedef typename allocator_type::pointer pointer;
+		typedef typename allocator_type::const_pointer const_pointer;
+		// typedef typename ft::random_access_iterator<value_type> iterator;
+		// typedef typename ft::constant_random_access_iterator<const value_type> const_iterator;
+		// typedef typename ft::reverse_iterator<iterator> reverse_iterator;
+		// typedef typename ft::reverse_iterator<const_iterator> const_reverse_iterator;
+		// typedef ptrdiff_t difference_type;
+		typedef size_t size_type;
+
 		//default constructor
 		vector(void) : _size(0), _capacity(10), _array(new int[_capacity])
 		{
@@ -112,10 +126,21 @@ class vector
 				delete[] _array;
 		}
 
+		// //Iterator for vector https://www.youtube.com/watch?v=F9eDv-YIOQ0
+		// VectorIterator begin()
+		// {
+		// 	return (VectorIterator(_data));
+		// }
+
+		// VectorIterator end()
+		// {
+		// 	return (VectorIterator(_data + _size));
+		// }
+
 	private:
-		int _size;
-		int _capacity;
-		int *_array;
+		T _size;
+		T _capacity;
+		T *_array;
 		
 
 	public:

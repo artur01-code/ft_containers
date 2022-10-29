@@ -33,20 +33,22 @@ int main(void)
 		{
 			for (int i = 0; i < 12; i++)
 				v1.pop_back();
+			ft::vector<int> v2(1);
+			v2 = v1; // test the copy assigment operator
+			// ft::vector<int> v3(v1); //test copy constructor
+			v2.erase(7);
+			v2.insert(7, 10);
+			print_varray(v1);
+			print_varray(v2);
 		}
 		catch(const std::exception& e)
 		{
 			std::cerr << e.what() << std::endl;
 		}
 		
-		ft::vector<int> v2(1);
-		v2 = v1; // test the copy assigment operator
-		// ft::vector<int> v3(v1); //test copy constructor
-		v2.erase(7);
-		v2.insert(7, 10);
 
-		print_varray(v1);
-		print_varray(v2);
+
+
 		// print_varray(v3);
 
 	}
