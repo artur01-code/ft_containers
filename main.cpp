@@ -1,3 +1,7 @@
+#ifndef M_DEBUG
+# define M_DEBUG 0
+#endif
+
 /*ORIGINALS*/
 #include <vector>
 
@@ -7,9 +11,6 @@
 #include "iterator_traits.hpp"
 #include "vector_iterator.hpp"
 
-#ifndef M_DEBUG
-# define M_DEBUG 0
-#endif
 
 
 /*TEST FUKTION*/
@@ -21,13 +22,14 @@ void print_varray(ft::vector<int> &rhs)
 /*MAIN*/
 int main(void)
 {
-	std::cout << COLOR_RED << "\n\noriginal vector	" << COLOR_WHITE;
-	std::cout << COLOR_GREEN << "my own vector\n\n" << COLOR_WHITE << std::endl;
+	std::cout << COLOR_RED << "\n\noriginal vector		" << COLOR_DEFAULT "|	" << COLOR_DEFAULT;
+	std::cout << COLOR_GREEN << "my own vector\n" << COLOR_DEFAULT << std::endl;
+	std::cout << COLOR_YELLOW << "Debug messages\n\n" << COLOR_DEFAULT << std::endl;
 
 	//		THE ORIGINAL VECTOR CLASS
 	{
 		std::cout << std::string(60, '-') << std::endl;
-		std::cout << COLOR_RED << "push_back 10 times" << COLOR_WHITE << std::endl;
+		std::cout << COLOR_RED << "push_back 10 times" << COLOR_DEFAULT << std::endl;
 		std::vector<int> v1;
 		for (int i = 0; i < 10; i++)
 			v1.push_back(i);
@@ -39,7 +41,7 @@ int main(void)
 	//		TESTING MY OWN VECTOR CLASS
 	{
 		std::cout << std::endl << std::string(60, '-') << std::endl;
-		std::cout << COLOR_GREEN << "push_back 10 times" << COLOR_WHITE << std::endl;
+		std::cout << COLOR_GREEN << "push_back 10 times" << COLOR_DEFAULT << std::endl;
 		ft::vector<int> v1;
 
 		try
