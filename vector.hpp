@@ -78,70 +78,6 @@ namespace ft {
 				this->_size = rhs._size;
 				return (*this);
 			}
-			//[] operator overload
-			int& operator[](int index)
-			{
-				if (M_DEBUG)
-					std::cout << COLOR_YELLOW << "Vector []-overload" << COLOR_DEFAULT << std::endl;
-				return (_array[index]);
-			}
-
-			int& front()
-			{
-				if (M_DEBUG)
-					std::cout << COLOR_YELLOW << "Vector front" << COLOR_DEFAULT << std::endl;
-				return (_array[0]);
-			}
-
-			int& back()
-			{
-				if (M_DEBUG)
-					std::cout << COLOR_YELLOW << "Vector back" << COLOR_DEFAULT << std::endl;
-				return (_array[_size - 1]);
-			}
-
-			void insert(int index, int value)
-			{
-				if (M_DEBUG)
-					std::cout << COLOR_YELLOW << "Vector insert" << COLOR_DEFAULT << std::endl;
-				if ((index < 0) || (index >= _size))
-					throw std::out_of_range("Insert - Index out of range");
-				if (_size != _capacity)
-				{
-					for (int i = _size - 1; i >= index; --i)
-						_array[i + 1] = _array[i];
-					_array[index] = value;
-					++_size;
-				}
-				else
-				{
-					_capacity *= 2;
-					int *newArray = new int[_capacity];
-					for (int i = 0; i < _size; ++i)
-						newArray[i] = _array[i];
-					delete[] _array;
-					_array = newArray;
-					insert(index, value);
-				}
-			}
-
-			void erase(int index)
-			{
-				if (M_DEBUG)
-					std::cout << COLOR_YELLOW << "Vector erase" << COLOR_DEFAULT << std::endl;
-				if ((index < 0) || (index >= _size))
-					throw std::out_of_range("Erase - Index out of range");
-				for (int i = index; i < _size - 1; ++i)
-					_array[i] = _array[i + 1];
-				--_size;
-			}
-
-			void clear(void)
-			{
-				if (M_DEBUG)
-					std::cout << COLOR_YELLOW << "Vector clear" << COLOR_DEFAULT << std::endl;
-				_size = 0;
-			}
 
 			~vector(void)
 			{
@@ -170,6 +106,68 @@ namespace ft {
 			
 
 		public:
+
+/*----------FUNCTIONS---------------------*/
+
+			int& front()
+			{
+				if (M_DEBUG)
+					std::cout << COLOR_YELLOW << "Vector front" << COLOR_DEFAULT << std::endl;
+				return (_array[0]);
+			}
+
+			int& back()
+			{
+				if (M_DEBUG)
+					std::cout << COLOR_YELLOW << "Vector back" << COLOR_DEFAULT << std::endl;
+				return (_array[_size - 1]);
+			}
+
+			/*NEEDS TO TAKE AN ITERATOR*/
+			void insert(int index, int value)
+			{
+				if (M_DEBUG)
+					std::cout << COLOR_YELLOW << "Vector insert" << COLOR_DEFAULT << std::endl;
+				if ((index < 0) || (index >= _size))
+					throw std::out_of_range("Insert - Index out of range");
+				if (_size != _capacity)
+				{
+					for (int i = _size - 1; i >= index; --i)
+						_array[i + 1] = _array[i];
+					_array[index] = value;
+					++_size;
+				}
+				else
+				{
+					_capacity *= 2;
+					int *newArray = new int[_capacity];
+					for (int i = 0; i < _size; ++i)
+						newArray[i] = _array[i];
+					delete[] _array;
+					_array = newArray;
+					insert(index, value);
+				}
+			}
+
+			/*NEEDS TO TAKE AN ITERATOR*/
+			void erase(int index)
+			{
+				if (M_DEBUG)
+					std::cout << COLOR_YELLOW << "Vector erase" << COLOR_DEFAULT << std::endl;
+				if ((index < 0) || (index >= _size))
+					throw std::out_of_range("Erase - Index out of range");
+				for (int i = index; i < _size - 1; ++i)
+					_array[i] = _array[i + 1];
+				--_size;
+			}
+
+			void clear(void)
+			{
+				if (M_DEBUG)
+					std::cout << COLOR_YELLOW << "Vector clear" << COLOR_DEFAULT << std::endl;
+				_size = 0;
+			}
+
 			void push_back(int value)
 			{
 				if (M_DEBUG)
@@ -221,6 +219,16 @@ namespace ft {
 				if (M_DEBUG)
 					std::cout << COLOR_YELLOW << "Vector capacity" << COLOR_DEFAULT << std::endl;
 				return (_capacity);
+			}
+
+/*----------OPERATORS---------------------*/
+
+			//[] operator overload
+			int& operator[](int index)
+			{
+				if (M_DEBUG)
+					std::cout << COLOR_YELLOW << "Vector []-overload" << COLOR_DEFAULT << std::endl;
+				return (_array[index]);
 			}
 
 			bool operator==(const vector& rhs) const
