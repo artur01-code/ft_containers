@@ -220,8 +220,8 @@ namespace ft {
 			//insert with range
 			template <class InputIterator>
 			void insert(iterator position, InputIterator first, InputIterator last, 
-				typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = 0) {
-				
+				typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = 0) 
+			{
 				if (first == last)
 					return;
 				size_type tmp_size = 0;
@@ -298,8 +298,9 @@ namespace ft {
 				}
 			}
 
-			iterator erase (iterator position) {
-				
+			//erase by index
+			iterator erase(iterator position) 
+			{
 				size_type pos_counter = 0;
 				for (iterator it = this->begin(); it != position; it++)
 					pos_counter++;
@@ -314,6 +315,25 @@ namespace ft {
 				}
 				_size--;
 				return (iterator(&(_array[pos_counter])));
+			}
+
+			//earse a range
+			iterator erase(iterator first, iterator last) 
+			{
+				iterator tmp = first;
+				difference_type tmp_size = last - first;
+				while (first != this->end())
+				{
+					_alloc.destroy(&(*first));
+					if (last != this->end())
+					{
+						_alloc.construct(&(*first), *last);
+						last++;
+					}
+					first++;
+				}
+				_size -= tmp_size;
+				return (tmp);
 			}
 
 			void clear(void)

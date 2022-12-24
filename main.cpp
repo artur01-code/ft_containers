@@ -169,6 +169,27 @@ int main(void)
 	}
 
 /*---------------------------------------------------------------------------------------------------*/
+	{
+	std::cout << std::endl << std::string(60, '-') << std::endl;
+	/*-----VEC_ORI erase() with range-----*/
+	std::cout << COLOR_RED << "vec_ori.erase(it, it + 3)" << COLOR_DEFAULT << std::endl;
+	std::vector<int>::iterator it_ori_start = vec_ori.begin();
+	std::vector<int>::iterator it_ori_end = it_ori_start + 3;
+	vec_ori.erase(it_ori_start, it_ori_end);
+	for (std::vector<int>::iterator iter = vec_ori.begin(); iter != vec_ori.end(); iter++)
+		std::cout << *iter << " ";
+	std::cout << " | | " << std::endl;
+
+
+	/*-----VEC_OWN erase() with range -----*/
+	std::cout << COLOR_GREEN << "vec_own.erase(it, it + 3)" << COLOR_DEFAULT << std::endl;
+	ft::vector<int>::iterator it_own_start = vec_own.begin();
+	ft::vector<int>::iterator it_own_end = it_own_start + 3;
+	vec_own.erase(it_own_start, it_own_end);
+	print_varray(vec_own);
+	}
+
+/*---------------------------------------------------------------------------------------------------*/
 	std::cout << std::endl << std::string(60, '-') << std::endl;
 	/*-----VEC_ORI pop_back()-----*/
 	std::cout << COLOR_RED << "pop_back()" << COLOR_DEFAULT << std::endl;
