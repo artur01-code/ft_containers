@@ -139,7 +139,7 @@ int main(void)
 	std::cout << " | | " << std::endl;
 
 
-	/*-----VEC_OWN insert() by index with n-----*/
+	/*-----VEC_OWN insert() index by range-----*/
 	std::cout << COLOR_GREEN << "vec_own.insert(it, myarray, myarray + 4)" << COLOR_DEFAULT << std::endl;
 	ft::vector<int>::iterator it_own = vec_own.begin();
 	it_own += 3;
@@ -153,7 +153,7 @@ int main(void)
 	/*-----VEC_ORI erase()-----*/
 	std::cout << COLOR_RED << "vec_ori.erase(it + 3)" << COLOR_DEFAULT << std::endl;
 	std::vector<int>::iterator it_ori = vec_ori.begin();
-	it_ori + 3;
+	it_ori += 3;
 	vec_ori.erase(it_ori);
 	for (std::vector<int>::iterator iter = vec_ori.begin(); iter != vec_ori.end(); iter++)
 		std::cout << *iter << " ";
@@ -162,8 +162,9 @@ int main(void)
 
 	/*-----VEC_OWN erase()-----*/
 	std::cout << COLOR_GREEN << "vec_own.erase(it + 3)" << COLOR_DEFAULT << std::endl;
-	std::cout << "NEED TO TAKE AN ITERATOR HERE" << std::endl;
-	vec_own.erase(3);
+	ft::vector<int>::iterator it_own = vec_own.begin();
+	it_own += 3;
+	vec_own.erase(it_own);
 	print_varray(vec_own);
 	}
 

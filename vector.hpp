@@ -298,16 +298,22 @@ namespace ft {
 				}
 			}
 
-			/*NEEDS TO TAKE AN ITERATOR*/
-			void erase(int index)
-			{
-				if (M_DEBUG)
-					std::cout << COLOR_YELLOW << "Vector erase" << COLOR_DEFAULT << std::endl;
-				if ((index < 0) || ((size_t)index >= _size))
-					throw std::out_of_range("Erase - Index out of range");
-				for (size_t i = index; i < _size - 1; ++i)
-					_array[i] = _array[i + 1];
-				--_size;
+			iterator erase (iterator position) {
+				
+				size_type pos_counter = 0;
+				for (iterator it = this->begin(); it != position; it++)
+					pos_counter++;
+				_alloc.destroy(&(_array[pos_counter]));
+				if (pos_counter < (_size - 1))
+				{
+					for (size_type i = pos_counter; i < _size - 1; i++)
+					{
+						_alloc.construct(&(_array[i]), _array[i + 1]);
+						_alloc.destroy(&(_array[i + 1]));
+					}
+				}
+				_size--;
+				return (iterator(&(_array[pos_counter])));
 			}
 
 			void clear(void)
