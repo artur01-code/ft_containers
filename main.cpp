@@ -84,6 +84,7 @@ int main(void)
 	std::cout << "vec_own.back(): " << vec_own.back() << std::endl;
 
 /*---------------------------------------------------------------------------------------------------*/
+	{
 	std::cout << std::endl << std::string(60, '-') << std::endl;
 	/*-----VEC_ORI insert() index-----*/
 	std::cout << COLOR_RED << "vec_ori.insert(it + 3, 42)" << COLOR_DEFAULT << std::endl;
@@ -101,11 +102,15 @@ int main(void)
 	it_own += 3;
 	vec_own.insert(it_own, 42);
 	print_varray(vec_own);
+	}
 
 /*---------------------------------------------------------------------------------------------------*/
+	{
 	std::cout << std::endl << std::string(60, '-') << std::endl;
 	/*-----VEC_ORI insert() index with n-----*/
 	std::cout << COLOR_RED << "vec_ori.insert(it + 3, 10, 42)" << COLOR_DEFAULT << std::endl;
+	std::vector<int>::iterator it_ori = vec_ori.begin();
+	it_ori += 3;
 	vec_ori.insert(it_ori, 10, 42);
 	for (std::vector<int>::iterator iter = vec_ori.begin(); iter != vec_ori.end(); iter++)
 		std::cout << *iter << " ";
@@ -114,13 +119,19 @@ int main(void)
 
 	/*-----VEC_OWN insert() by index with n-----*/
 	std::cout << COLOR_GREEN << "vec_own.insert(it + 3, 10, 42)" << COLOR_DEFAULT << std::endl;
+	ft::vector<int>::iterator it_own = vec_own.begin();
+	it_own += 3;
 	vec_own.insert(it_own, 10, 42);
 	print_varray(vec_own);
+	}
 
 /*---------------------------------------------------------------------------------------------------*/
+	{
 	std::cout << std::endl << std::string(60, '-') << std::endl;
 	/*-----VEC_ORI erase()-----*/
 	std::cout << COLOR_RED << "vec_ori.erase(it + 3)" << COLOR_DEFAULT << std::endl;
+	std::vector<int>::iterator it_ori = vec_ori.begin();
+	it_ori + 3;
 	vec_ori.erase(it_ori);
 	for (std::vector<int>::iterator iter = vec_ori.begin(); iter != vec_ori.end(); iter++)
 		std::cout << *iter << " ";
@@ -132,6 +143,7 @@ int main(void)
 	std::cout << "NEED TO TAKE AN ITERATOR HERE" << std::endl;
 	vec_own.erase(3);
 	print_varray(vec_own);
+	}
 
 /*---------------------------------------------------------------------------------------------------*/
 	std::cout << std::endl << std::string(60, '-') << std::endl;

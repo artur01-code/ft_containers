@@ -197,10 +197,8 @@ namespace ft {
 					return ;
 				}
 				size_type pos_counter = 0;
-				std::cout << "arrg" << std::endl;
 				for (iterator it = this->begin(); it != position; it++)
 					pos_counter++;
-				std::cout << "arrg2" << std::endl;
 				if (_size + n >= _capacity)
 				{
 					if (!_capacity)
@@ -208,7 +206,6 @@ namespace ft {
 					else
 						realloc(_size + n);
 				}
-				std::cout << "arrg3" << std::endl;
 				for (size_type i = (_size + n - 1); i >= pos_counter + n; i--)
 				{
 					_alloc.construct(&(_array[i]), _array[i - n]);
