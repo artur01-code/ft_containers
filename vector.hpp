@@ -104,6 +104,21 @@ namespace ft {
 			size_t			_capacity;
 			pointer			_array; //same as T*
 			allocator_type	_alloc;
+
+		//reallocates the memory given by the new capacity
+		void realloc(size_type new_capacity, value_type val = value_type())
+		{
+			pointer tmp =_alloc.allocate(new_capacity);
+			for (size_type i = 0; i < _size; i++)
+				_alloc.construct(&(tmp[i]), _array[i]);
+			for (size_type i = _size; i < new_capacity; i++)
+				_alloc.construct(&(tmp[i]), val);
+			for (size_type i = 0; i < _size; i++)
+				_alloc.destroy(&(_array[i]));
+			_alloc.deallocate(_array, _capacity);
+			_array = tmp;
+			_capacity = new_capacity;
+		}
 			
 
 		public:
