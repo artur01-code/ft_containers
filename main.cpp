@@ -108,20 +108,42 @@ int main(void)
 	{
 	std::cout << std::endl << std::string(60, '-') << std::endl;
 	/*-----VEC_ORI insert() index with n-----*/
-	std::cout << COLOR_RED << "vec_ori.insert(it + 3, 10, 42)" << COLOR_DEFAULT << std::endl;
+	std::cout << COLOR_RED << "vec_ori.insert(it + 3, 10, 21)" << COLOR_DEFAULT << std::endl;
 	std::vector<int>::iterator it_ori = vec_ori.begin();
 	it_ori += 3;
-	vec_ori.insert(it_ori, 10, 42);
+	vec_ori.insert(it_ori, 10, 21);
 	for (std::vector<int>::iterator iter = vec_ori.begin(); iter != vec_ori.end(); iter++)
 		std::cout << *iter << " ";
 	std::cout << " | | " << std::endl;
 
 
 	/*-----VEC_OWN insert() by index with n-----*/
-	std::cout << COLOR_GREEN << "vec_own.insert(it + 3, 10, 42)" << COLOR_DEFAULT << std::endl;
+	std::cout << COLOR_GREEN << "vec_own.insert(it + 3, 10, 21)" << COLOR_DEFAULT << std::endl;
 	ft::vector<int>::iterator it_own = vec_own.begin();
 	it_own += 3;
-	vec_own.insert(it_own, 10, 42);
+	vec_own.insert(it_own, 10, 21);
+	print_varray(vec_own);
+	}
+
+/*---------------------------------------------------------------------------------------------------*/
+	{
+	std::cout << std::endl << std::string(60, '-') << std::endl;
+	/*-----VEC_ORI insert() index by range-----*/
+	std::cout << COLOR_RED << "vec_ori.insert(it, myarray, myarray + 4)" << COLOR_DEFAULT << std::endl;
+	std::vector<int>::iterator it_ori = vec_ori.begin();
+	it_ori += 3;
+	int myarray[] = {69, 96, 420, 240};
+	vec_ori.insert(it_ori, myarray, myarray + 4);
+	for (std::vector<int>::iterator iter = vec_ori.begin(); iter != vec_ori.end(); iter++)
+		std::cout << *iter << " ";
+	std::cout << " | | " << std::endl;
+
+
+	/*-----VEC_OWN insert() by index with n-----*/
+	std::cout << COLOR_GREEN << "vec_own.insert(it, myarray, myarray + 4)" << COLOR_DEFAULT << std::endl;
+	ft::vector<int>::iterator it_own = vec_own.begin();
+	it_own += 3;
+	vec_own.insert(it_own, myarray, myarray + 4);
 	print_varray(vec_own);
 	}
 

@@ -6,6 +6,7 @@
 #include <stdexcept>
 #include <iterator>
 #include "vector_iterator.hpp"
+#include "utils.hpp"
 
 //https://www.youtube.com/watch?v=YpNCBw-cPWw
 
@@ -217,6 +218,85 @@ namespace ft {
 			}
 
 			//insert with range
+			template <class InputIterator>
+			void insert(iterator position, InputIterator first, InputIterator last, 
+				typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = 0) {
+				
+				if (first == last)
+					return;
+				size_type tmp_size = 0;
+				for (InputIterator tmp_it = first; tmp_it != last; tmp_it++)
+					tmp_size++;
+				
+				pointer dup_start = NULL;
+				pointer dup_end = NULL;
+				size_type dup_capacity = 0;
+				pointer pointer_pos = position.base();
+				InputIterator it_first = first;
+				InputIterator it_last= last;
+				pointer tmp = _array;
+
+				if (_size + tmp_size >= _capacity)
+				{
+					dup_capacity = _size + tmp_size;
+					if (_size + tmp_size > _capacity * 2)
+						dup_capacity = _size + tmp_size;
+					else
+						dup_capacity = _capacity * 2;
+					dup_start = _alloc.allocate(dup_capacity);
+					dup_end = dup_start;
+					try 
+					{
+						while(tmp != pointer_pos)
+						{
+							_alloc.construct(dup_end, *tmp);
+							_alloc.destroy(tmp);
+							dup_end++;
+							tmp++;
+						}
+						while (it_first != it_last)
+						{
+							_alloc.construct(dup_end, *it_first);
+							dup_end++;
+							it_first++;
+						}
+						while (tmp != (_array + _size))
+						{
+							_alloc.construct(dup_end, *tmp);
+							_alloc.destroy(tmp);
+							dup_end++;
+							tmp++;
+						}
+					}
+					catch (...)
+					{
+						while (dup_start != dup_end)
+							_alloc.destroy(dup_end--);
+						_alloc.destroy(dup_start);
+						_alloc.deallocate(dup_start, dup_capacity);
+						throw;
+					}
+					_alloc.deallocate(_array, _capacity);
+					_array = dup_start;
+					_capacity = dup_capacity;
+					_size += tmp_size;
+				}
+				else {
+
+					size_type pos_counter = 0;
+					for (iterator it = this->begin(); it != position; it++)
+						pos_counter++;
+
+					for (size_type i = (_size + tmp_size - 1); i >= (pos_counter + tmp_size); i--)
+					{
+						_alloc.construct(&(_array[i]), _array[i - tmp_size]);
+						_alloc.destroy(&(_array[i - tmp_size]));
+					}
+					for (size_type i = 0; i < tmp_size; i++)
+						_alloc.construct(&(_array[pos_counter + i]), *first++);
+					_size += tmp_size;
+				}
+			}
 
 			/*NEEDS TO TAKE AN ITERATOR*/
 			void erase(int index)
