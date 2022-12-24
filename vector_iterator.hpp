@@ -94,7 +94,97 @@ namespace ft
 
         protected:
             pointer _ptr;
-    };
-}
+    };//class
+
+    /*---------------VECTOR ITERATOR OPERATOR OVERLOADS (NON-MEMBER) -> DIFFERENT ITERATOR TYPE----------------------------------------*/
+
+	template<typename T1, typename T2, typename Container>
+	bool operator==(const vector_iterator<T1, Container> &lhs, const vector_iterator<T2, Container> &rhs) 
+    {
+				return (lhs.base() == rhs.base());	
+	}
+
+	template<typename T1, typename T2, typename Container>
+	bool operator!=(const vector_iterator<T1, Container> &lhs, const vector_iterator<T2, Container> &rhs) 
+    {
+		return (!(lhs.base() == rhs.base()));
+	}
+
+	template<typename T1, typename T2, typename Container>
+	bool operator<(const vector_iterator<T1, Container> &lhs, const vector_iterator<T2, Container> &rhs) 
+    {
+		return (lhs.base() < rhs.base());
+	}
+
+	template<typename T1, typename T2, typename Container>
+	bool operator<=(const vector_iterator<T1, Container> &lhs, const vector_iterator<T2, Container> &rhs) 
+    {
+		return (lhs.base() <= rhs.base());
+	}
+
+	template<typename T1, typename T2, typename Container>
+	bool operator>(const vector_iterator<T1, Container> &lhs, const vector_iterator<T2, Container> &rhs) 
+    {
+		return (lhs.base() > rhs.base());
+	}
+
+	template<typename T1, typename T2, typename Container>
+	bool operator>=(const vector_iterator<T1, Container> &lhs, const vector_iterator<T2, Container> &rhs) 
+    {
+		return (lhs.base() >= rhs.base());
+	}
+
+	template<typename T2, typename Container>
+	vector_iterator<T2, Container> operator+(typename vector_iterator<T2, Container>::difference_type offset, const vector_iterator<T2, Container> &rhs) 
+    {
+		return (vector_iterator<T2, Container>(rhs.base() + offset));
+	}
+
+	template<typename T1, typename Container>
+	vector_iterator<T1, Container> operator+(const vector_iterator<T1, Container> &lhs, typename vector_iterator<T1, Container>::difference_type offset) 
+    {
+		return (vector_iterator<T1, Container>(lhs.base() + offset));
+	}
+
+	template<typename T2, typename Container>
+	vector_iterator<T2, Container> operator-(typename vector_iterator<T2, Container>::difference_type offset, const vector_iterator<T2, Container> &rhs) 
+    {
+		return (vector_iterator<T2, Container>(rhs.base() - offset));
+	}
+
+	template<typename T1, typename Container>
+	vector_iterator<T1, Container> operator-(const vector_iterator<T1, Container> &lhs, typename vector_iterator<T1, Container>::difference_type offset) 
+    {
+		return (vector_iterator<T1, Container>(lhs.base() - offset));
+	}
+
+
+//---------------VECTOR ITERATOR OPERATOR OVERLOADS (NON-MEMBER) -> FOR SIZE_TYPE CALCULATIONS----------------------------------------
+
+
+	template<typename TPtr1, typename TPtr2, typename Container>
+	typename ft::iterator_traits<TPtr1>::difference_type operator-(const vector_iterator<TPtr1, Container>& lhs, const vector_iterator<TPtr2, Container>& rhs) 
+    {
+		return lhs.base() - rhs.base();
+	}
+
+	template<typename TPtr, typename Container>
+	typename ft::iterator_traits<TPtr>::difference_type operator-(const vector_iterator<TPtr, Container>& lhs, const vector_iterator<TPtr, Container>& rhs) 
+    {
+		return lhs.base() - rhs.base();
+	}
+
+	template<typename TPtr1, typename TPtr2, typename Container>
+	typename ft::iterator_traits<TPtr1>::difference_type operator+(const vector_iterator<TPtr1, Container>& lhs, const vector_iterator<TPtr2, Container>& rhs) 
+    {
+		return lhs.base() + rhs.base();
+	}
+
+	template<typename TPtr, typename Container>
+	typename ft::iterator_traits<TPtr>::difference_type operator+(const vector_iterator<TPtr, Container>& lhs, const vector_iterator<TPtr, Container>& rhs) 
+    {
+		return lhs.base() + rhs.base();
+	}
+}//namespace
 
 #endif

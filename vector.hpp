@@ -147,7 +147,41 @@ namespace ft {
 				return (_array[_size - 1]);
 			}
 
-			/*NEEDS TO TAKE AN ITERATOR*/
+			//takes the position aka index
+			iterator insert(iterator position, const value_type& val)
+			{
+				if (!_array)
+				{
+					_array = _alloc.allocate(1);
+					_alloc.construct(&_array[0], val);
+					_size = 1;
+					_capacity = 1;
+					return (iterator(&_array[0]));
+				}
+				size_type pos_counter = 0;
+				for (iterator it = this->begin(); it != position; it++)
+					pos_counter++;
+				if (_size == _capacity)
+				{
+					if (!_capacity)
+						realloc(1);
+					else
+						realloc(_capacity * 2);
+				}
+				for (size_type i = _size; i > pos_counter; i--)
+				{
+					_alloc.construct(&(_array[i]), _array[i - 1]);
+					_alloc.destroy(&(_array[i - 1]));
+				}
+				_alloc.construct(&(_array[pos_counter]), val);
+				_size++;
+				return (iterator(&(_array[pos_counter])));
+			}
+
+			//insert with range
+
+			/*
+			//my old insert without iterator//
 			void insert(int index, int value)
 			{
 				if (M_DEBUG)
@@ -171,7 +205,7 @@ namespace ft {
 					_array = newArray;
 					insert(index, value);
 				}
-			}
+			} */
 
 			/*NEEDS TO TAKE AN ITERATOR*/
 			void erase(int index)
@@ -245,9 +279,8 @@ namespace ft {
 				return (_capacity);
 			}
 
-/*----------OPERATORS---------------------*/
-
-			//[] operator overload
+/*----------OPERATORS-------------*/
+			//not sure if they should be non member operators
 			int& operator[](int index)
 			{
 				if (M_DEBUG)
@@ -267,12 +300,13 @@ namespace ft {
 				return (true);
 			}
 
+			/* moved to non member operators
 			bool operator!=(const vector& rhs) const
 			{
 				if (M_DEBUG)
 					std::cout << COLOR_YELLOW << "Vector !=operator" << COLOR_DEFAULT << std::endl;
 				return !(*this == rhs);
-			}
+			}*/
 
 			friend std::ostream& operator<<(std::ostream& ostr, const vector& rhs)
 			{
@@ -286,8 +320,60 @@ namespace ft {
 				ostr << std::endl;
 				return (ostr);
 			}
-};
+	}; //class
 
-}
+/*----------OPERATORS (non member)---------------------*/
+
+	template< class T, class Alloc >
+	bool operator!=( const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs ) 
+	{
+		if (M_DEBUG)
+			std::cout << COLOR_YELLOW << "operator!=" << COLOR_DEFAULT << std::endl;	
+		return (!(lhs == rhs));
+	}
+/*
+	template< class T, class Alloc >
+	bool operator==( const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs ) 
+	{
+		if (M_DEBUG)
+			std::cout << COLOR_YELLOW << "operator==" << COLOR_DEFAULT << std::endl;	
+		if (lhs.size() != rhs.size())
+			return (false);
+		return (ft::equal(lhs.begin(), lhs.end(), rhs.begin()));
+	}
+
+	template< class T, class Alloc >
+	bool operator<( const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs ) 
+	{
+		if (M_DEBUG)
+			std::cout << COLOR_YELLOW << "operator<" << COLOR_DEFAULT << std::endl;
+		return (ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end()));
+	}
+				
+	template< class T, class Alloc >
+	bool operator<=( const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs ) 
+	{
+		if (M_DEBUG)
+			std::cout << COLOR_YELLOW << "operator<=" << COLOR_DEFAULT << std::endl;
+		return (!(rhs < lhs));
+	}
+
+	template< class T, class Alloc >
+	bool operator>( const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs ) 
+	{
+		if (M_DEBUG)
+			std::cout << COLOR_YELLOW << "operator>" << COLOR_DEFAULT << std::endl;	
+		return (rhs < lhs);
+	}
+
+	template< class T, class Alloc >
+	bool operator>=( const ft::vector<T,Alloc>& lhs, const ft::vector<T,Alloc>& rhs ) 
+	{
+		if (M_DEBUG)
+			std::cout << COLOR_YELLOW << "operator>=" << COLOR_DEFAULT << std::endl;	
+		return (!(lhs < rhs));
+	}*/
+
+}//namespace
 
 #endif
