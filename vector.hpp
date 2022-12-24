@@ -21,10 +21,10 @@ namespace ft {
 			typedef std::ptrdiff_t										difference_type;
 			typedef T&													reference;
 			typedef const T												const_reference;
-			typedef T*													Pointer;
-			typedef const T*											const_Pointer;
-			typedef vector_iterator<Pointer, vector<T, Alloc> >			iterator;
-			typedef vector_iterator<const_Pointer, vector<T, Alloc> >	const_iterator;
+			typedef T*													pointer;
+			typedef const T*											const_pointer;
+			typedef vector_iterator<pointer, vector<T, Alloc> >			iterator;
+			typedef vector_iterator<const_pointer, vector<T, Alloc> >	const_iterator;
 			// typedef reverse_vector_iterator<iterator>					reverse_iterator;
 			// typedef reverse_vector_iterator<const_iterator>				const_reverse_iterator;
 
@@ -100,9 +100,10 @@ namespace ft {
 			// }
 
 		private:
-			T _size;
-			T _capacity;
-			T *_array;
+			size_t			_size;
+			size_t			_capacity;
+			pointer			_array; //same as T*
+			allocator_type	_alloc;
 			
 
 		public:
@@ -112,6 +113,7 @@ namespace ft {
 			iterator end(void) { return(iterator(_array + _size)); }
 			const_iterator begin(void) const { return( const_iterator(_array)); }
 			const_iterator end(void) const { return(const_iterator(_array + _size)); }
+			//reverse_iterator [...]
 
 
 /*----------FUNCTIONS---------------------*/
@@ -135,11 +137,11 @@ namespace ft {
 			{
 				if (M_DEBUG)
 					std::cout << COLOR_YELLOW << "Vector insert" << COLOR_DEFAULT << std::endl;
-				if ((index < 0) || (index >= _size))
+				if ((index < 0) || ((size_t)index >= _size))
 					throw std::out_of_range("Insert - Index out of range");
 				if (_size != _capacity)
 				{
-					for (int i = _size - 1; i >= index; --i)
+					for (int i = (int)_size - 1; i >= index; --i)
 						_array[i + 1] = _array[i];
 					_array[index] = value;
 					++_size;
@@ -148,7 +150,7 @@ namespace ft {
 				{
 					_capacity *= 2;
 					int *newArray = new int[_capacity];
-					for (int i = 0; i < _size; ++i)
+					for (size_t i = 0; i < _size; ++i)
 						newArray[i] = _array[i];
 					delete[] _array;
 					_array = newArray;
@@ -161,9 +163,9 @@ namespace ft {
 			{
 				if (M_DEBUG)
 					std::cout << COLOR_YELLOW << "Vector erase" << COLOR_DEFAULT << std::endl;
-				if ((index < 0) || (index >= _size))
+				if ((index < 0) || ((size_t)index >= _size))
 					throw std::out_of_range("Erase - Index out of range");
-				for (int i = index; i < _size - 1; ++i)
+				for (size_t i = index; i < _size - 1; ++i)
 					_array[i] = _array[i + 1];
 				--_size;
 			}
@@ -188,7 +190,7 @@ namespace ft {
 				{
 					_capacity *= 2;
 					int *newArray = new int[_capacity];
-					for (int i = 0; i < _size; ++i)
+					for (size_t i = 0; i < _size; ++i)
 						newArray[i] = _array[i];
 					_array[_size] = value;
 					_size++;
@@ -261,10 +263,10 @@ namespace ft {
 			{
 				if (M_DEBUG)
 					std::cout << COLOR_YELLOW << "Vector <<operator" << COLOR_DEFAULT << std::endl;
-				for (int i = 0; i < rhs._size; ++i)
+				for (size_t i = 0; i < rhs._size; ++i)
 					ostr << rhs._array[i] << " ";
 				ostr << " | | ";
-				for (int i = rhs._size; i < rhs._capacity; ++i)
+				for (size_t i = rhs._size; i < rhs._capacity; ++i)
 					ostr << rhs._array[i] << " ";
 				ostr << std::endl;
 				return (ostr);
