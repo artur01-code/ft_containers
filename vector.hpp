@@ -108,6 +108,8 @@ namespace ft {
 		//reallocates the memory given by the new capacity
 		void realloc(size_type new_capacity, value_type val = value_type())
 		{
+			if (M_DEBUG)
+				std::cout << COLOR_YELLOW << "realloc(" << new_capacity << ")" << COLOR_DEFAULT << std::endl;
 			pointer tmp =_alloc.allocate(new_capacity);
 			for (size_type i = 0; i < _size; i++)
 				_alloc.construct(&(tmp[i]), _array[i]);
@@ -150,6 +152,8 @@ namespace ft {
 			//takes the position aka index
 			iterator insert(iterator position, const value_type& val)
 			{
+				if (M_DEBUG)
+					std::cout << COLOR_YELLOW << "insert at position" << COLOR_DEFAULT << std::endl;
 				if (!_array)
 				{
 					_array = _alloc.allocate(1);
@@ -178,34 +182,44 @@ namespace ft {
 				return (iterator(&(_array[pos_counter])));
 			}
 
-			//insert with range
-
-			/*
-			//my old insert without iterator//
-			void insert(int index, int value)
+			//takes the position aka index with n
+			void insert (iterator position, size_type n, const value_type& val)
 			{
 				if (M_DEBUG)
-					std::cout << COLOR_YELLOW << "Vector insert" << COLOR_DEFAULT << std::endl;
-				if ((index < 0) || ((size_t)index >= _size))
-					throw std::out_of_range("Insert - Index out of range");
-				if (_size != _capacity)
+					std::cout << COLOR_YELLOW << "insert at position with n" << COLOR_DEFAULT << std::endl;
+				if (!_array)
 				{
-					for (int i = (int)_size - 1; i >= index; --i)
-						_array[i + 1] = _array[i];
-					_array[index] = value;
-					++_size;
+					_array = _alloc.allocate(n);
+					for (size_type i = 0; i < n; i++)
+						_alloc.construct(&(_array[i]), val);
+					_size = n;
+					_capacity = n;
+					return ;
 				}
-				else
+				size_type pos_counter = 0;
+				std::cout << "arrg" << std::endl;
+				for (iterator it = this->begin(); it != position; it++)
+					pos_counter++;
+				std::cout << "arrg2" << std::endl;
+				if (_size + n >= _capacity)
 				{
-					_capacity *= 2;
-					int *newArray = new int[_capacity];
-					for (size_t i = 0; i < _size; ++i)
-						newArray[i] = _array[i];
-					delete[] _array;
-					_array = newArray;
-					insert(index, value);
+					if (!_capacity)
+						realloc(n);
+					else
+						realloc(_size + n);
 				}
-			} */
+				std::cout << "arrg3" << std::endl;
+				for (size_type i = (_size + n - 1); i >= pos_counter + n; i--)
+				{
+					_alloc.construct(&(_array[i]), _array[i - n]);
+					_alloc.destroy(&(_array[i - n]));
+				}
+				for (size_type i = 0; i < n; i++)
+					_alloc.construct(&(_array[pos_counter + i]), val);
+				_size += n;
+			}
+
+			//insert with range
 
 			/*NEEDS TO TAKE AN ITERATOR*/
 			void erase(int index)
