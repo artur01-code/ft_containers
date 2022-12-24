@@ -21,6 +21,10 @@ namespace ft
             typedef typename ft::iterator_traits<T>::pointer            pointer;
             typedef typename ft::iterator_traits<T>::reference          reference;
 
+//---------------BASE FUNCTION (HELPER)--------------------------------------------------------------
+
+			pointer base() const { return (_ptr); }
+
 
 /*------VECTOR ITERATOR CONSTRUCTORS------*/
 		public:
@@ -32,6 +36,61 @@ namespace ft
 			//end addition
 			vector_iterator(const vector_iterator &copy) : _ptr(copy.base()) {}
 			~vector_iterator() {}
+
+//---------------VECTOR ITERATOR OPERATOR OVERLOADS----------------------------------------
+
+            reference operator*(void) const { return (*_ptr); }
+
+			vector_iterator& operator=(vector_iterator const &rhs) {
+				_ptr = rhs._ptr;
+				return (*this);
+			}
+
+			pointer operator->(void) const { return (_ptr); }
+
+			reference operator[](const difference_type &offset) const { return(*(_ptr + offset)); }
+			
+			vector_iterator &operator++(void) {
+				_ptr++;
+				return (*this);
+			}
+			
+			vector_iterator operator++(int) {
+				vector_iterator ret(*this);
+				_ptr++;
+				return (ret);
+			}
+
+			vector_iterator &operator--(void) {
+				_ptr--;
+				return (*this);
+			}
+			
+			vector_iterator operator--(int) {
+				vector_iterator ret(*this);
+				_ptr--;
+				return (ret);
+			}
+
+			vector_iterator operator+(difference_type offset) const {
+
+				return (vector_iterator(_ptr + offset));
+			}
+
+			vector_iterator  operator-(difference_type offset) const {
+
+				return (vector_iterator(_ptr - offset));
+			}
+
+			vector_iterator &operator+=(difference_type offset) {
+				_ptr += offset;
+				return (*this);
+			}
+			
+			vector_iterator &operator-=(difference_type offset) {
+				_ptr -= offset;
+				return (*this);
+			}
 
         protected:
             pointer _ptr;

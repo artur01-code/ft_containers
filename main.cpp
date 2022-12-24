@@ -153,6 +153,22 @@ int main(void)
 
 /*---------------------------------------------------------------------------------------------------*/
 	std::cout << std::endl << std::string(60, '-') << std::endl;
+	/*-----VEC_ORI iterator begin()-----*/
+	std::cout << COLOR_RED << "vec_ori.begin(): " << *vec_ori.begin() << COLOR_DEFAULT << std::endl;
+
+	/*-----VEC_OWN iterator begin()-----*/
+	std::cout << COLOR_GREEN << "vec_own.begin(): " << *vec_own.begin() << COLOR_DEFAULT << std::endl;
+
+/*---------------------------------------------------------------------------------------------------*/
+	std::cout << std::endl << std::string(60, '-') << std::endl;
+	/*-----VEC_ORI iterator end()-----*/
+	std::cout << COLOR_RED << "vec_ori.end(): " << *vec_ori.end() << COLOR_DEFAULT << std::endl;
+
+	/*-----VEC_OWN iterator end()-----*/
+	std::cout << COLOR_GREEN << "vec_own.end(): " << *vec_own.end() << COLOR_DEFAULT << std::endl;
+
+/*---------------------------------------------------------------------------------------------------*/
+	std::cout << std::endl << std::string(60, '-') << std::endl;
 	/*-----VEC_ORI clear()-----*/
 	std::cout << COLOR_RED << "clear()" << COLOR_DEFAULT << std::endl;
 	vec_ori.clear();

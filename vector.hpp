@@ -107,6 +107,13 @@ namespace ft {
 
 		public:
 
+/*----------ITERATOR FUNCTIONS---------------------*/
+			iterator begin(void) { return( iterator(_array) ); }
+			iterator end(void) { return(iterator(_array + _size)); }
+			const_iterator begin(void) const { return( const_iterator(_array)); }
+			const_iterator end(void) const { return(const_iterator(_array + _size)); }
+
+
 /*----------FUNCTIONS---------------------*/
 
 			int& front()
