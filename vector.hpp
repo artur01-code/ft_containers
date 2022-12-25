@@ -145,6 +145,34 @@ namespace ft {
 
 /*----------FUNCTIONS---------------------*/
 
+			reference at(size_type pos) 
+			{
+				if (pos >= _size)
+					throw std::out_of_range("vector.at() call out of range");
+				return(_array[pos]);
+			}
+
+			const_reference at(size_type pos) const 
+			{
+				if (pos >= _size)
+					throw std::out_of_range("vector.at() call out of range");
+				return(_array[pos]);
+			}
+
+			reference operator[](unsigned int index) 
+			{	
+				if (index >= _size)
+					throw std::out_of_range("vector[index] call out of range");
+				return *(_array + index);
+			}
+
+			const_reference operator[](unsigned int index) const 
+			{	
+				if (index >= _size)
+					throw std::out_of_range("vector[index] call out of range");
+				return *(_array + index);
+			}
+
 			reference front()
 			{
 				if (M_DEBUG)
@@ -401,6 +429,30 @@ namespace ft {
 					realloc(tmp_capacity, val);
 				}
 				_size = n;
+			}
+
+			void reserve(size_type new_cap) {
+
+				pointer tmp = NULL;
+				if (new_cap > _alloc.max_size())
+					throw std::length_error("Reserve: too big new cap");
+				else if (new_cap < _capacity)
+					return;
+				try 
+				{
+					tmp = _alloc.allocate(new_cap);
+				} 
+				catch (std::bad_alloc &e) 
+				{
+					throw e;
+				}
+				for (size_type i = 0; i < _size; i++)
+					_alloc.construct(&(tmp[i]), _array[i]);
+				for (size_type i = 0; i < _size; i++)
+					_alloc.destroy(&(_array[i]));
+				_alloc.deallocate(_array, _capacity);
+				_array = tmp;
+				_capacity = new_cap;
 			}
 
 			void push_back(const value_type& val)

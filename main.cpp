@@ -272,6 +272,18 @@ int main(void)
 
 /*---------------------------------------------------------------------------------------------------*/
 	std::cout << std::endl << std::string(60, '-') << std::endl;
+	/*-----VEC_ORI reserve()-----*/
+	std::cout << COLOR_RED << "reserve(100)" << COLOR_DEFAULT << std::endl;
+	vec_ori.reserve(100);
+	std::cout << vec_ori.capacity() << std::endl;
+
+	/*-----VEC_OWN reserve()-----*/
+	std::cout << COLOR_GREEN << "reserve(100)" << COLOR_DEFAULT << std::endl;
+	vec_own.reserve(100);
+	std::cout << vec_own.capacity() << std::endl;
+
+/*---------------------------------------------------------------------------------------------------*/
+	std::cout << std::endl << std::string(60, '-') << std::endl;
 	/*-----VEC_ORI clear()-----*/
 	std::cout << COLOR_RED << "clear()" << COLOR_DEFAULT << std::endl;
 	vec_ori.clear();
