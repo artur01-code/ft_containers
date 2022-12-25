@@ -1,5 +1,5 @@
 NAME	= ft_containers
-SRCS	= main.cpp
+SRCS	= tests/test_vector.cpp
 
 CC		= c++
 FLAGS	= -Wall -Wextra -Werror -std=c++98 -pedantic

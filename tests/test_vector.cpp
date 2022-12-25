@@ -6,10 +6,10 @@
 #include <vector>
 
 /*OWN*/
-#include "colors.hpp"
-#include "vector.hpp"
-#include "iterator_traits.hpp"
-#include "vector_iterator.hpp"
+#include "../colors.hpp"
+#include "../vector.hpp"
+#include "../iterator_traits.hpp"
+#include "../vector_iterator.hpp"
 
 
 

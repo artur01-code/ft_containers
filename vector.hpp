@@ -26,8 +26,8 @@ namespace ft {
 			typedef const T*											const_pointer;
 			typedef vector_iterator<pointer, vector<T, Alloc> >			iterator;
 			typedef vector_iterator<const_pointer, vector<T, Alloc> >	const_iterator;
-			// typedef reverse_vector_iterator<iterator>					reverse_iterator;
-			// typedef reverse_vector_iterator<const_iterator>				const_reverse_iterator;
+			typedef reverse_vector_iterator<iterator>					reverse_iterator;
+			typedef reverse_vector_iterator<const_iterator>				const_reverse_iterator;
 
 /*----------CONSTRUCTORS---------------------*/
 
