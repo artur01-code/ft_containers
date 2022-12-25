@@ -145,18 +145,46 @@ namespace ft {
 
 /*----------FUNCTIONS---------------------*/
 
-			int& front()
+			reference front()
 			{
 				if (M_DEBUG)
 					std::cout << COLOR_YELLOW << "Vector front" << COLOR_DEFAULT << std::endl;
 				return (_array[0]);
 			}
 
-			int& back()
+			const_reference front() const
+			{
+				if (M_DEBUG)
+					std::cout << COLOR_YELLOW << "Vector front const" << COLOR_DEFAULT << std::endl;
+				return (_array[0]);
+			}
+
+			reference back()
 			{
 				if (M_DEBUG)
 					std::cout << COLOR_YELLOW << "Vector back" << COLOR_DEFAULT << std::endl;
 				return (_array[_size - 1]);
+			}
+
+			const_reference back() const
+			{
+				if (M_DEBUG)
+					std::cout << COLOR_YELLOW << "Vector back const" << COLOR_DEFAULT << std::endl;
+				return (_array[_size - 1]);
+			}
+
+			T* data(void)
+			{
+				if (M_DEBUG)
+					std::cout << COLOR_YELLOW << "Vector data" << COLOR_DEFAULT << std::endl;
+				return (_array);
+			}
+
+			const T* data(void) const
+			{
+				if (M_DEBUG)
+					std::cout << COLOR_YELLOW << "Vector data const" << COLOR_DEFAULT << std::endl;
+				return (_array);
 			}
 
 			//takes the position aka index
@@ -404,14 +432,21 @@ namespace ft {
 				return (_size == 0);
 			}
 
-			int size(void) const
+			size_type size(void) const 
 			{
 				if (M_DEBUG)
 					std::cout << COLOR_YELLOW << "Vector size" << COLOR_DEFAULT << std::endl;
-				return (_size);
+				return(_size);
+			}
+			
+			size_type max_size(void) const 
+			{
+				if (M_DEBUG)
+					std::cout << COLOR_YELLOW << "Vector max_size" << COLOR_DEFAULT << std::endl;
+				return(_alloc.max_size());
 			}
 
-			int capacity(void) const
+			size_type capacity(void) const
 			{
 				if (M_DEBUG)
 					std::cout << COLOR_YELLOW << "Vector capacity" << COLOR_DEFAULT << std::endl;
