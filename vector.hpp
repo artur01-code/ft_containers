@@ -31,80 +31,89 @@ namespace ft {
 
 /*----------CONSTRUCTORS---------------------*/
 
-			//default constructor
-			vector(void) : _size(0), _capacity(10), _array(new int[_capacity])
+			//constructor
+			explicit vector(const allocator_type &alloc = allocator_type()) : _size(0),_capacity(0), _alloc(alloc)
 			{
 				if (M_DEBUG)
 					std::cout << COLOR_YELLOW << "Vector default constructor" << COLOR_DEFAULT << std::endl;
-				//nothing here...
+				_array = NULL; 
 			}
-
-			//default constructor with elements
-			vector(int elements, int value = 0) : _size(elements), _capacity(elements + 5), _array(new int[_capacity])
+			
+			//constructor with attributes
+			explicit vector(size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type())
+			: _size(n), _capacity(n), _alloc(alloc)  
 			{
 				if (M_DEBUG)
-					std::cout << COLOR_YELLOW << "Vector default constructor with elements" << COLOR_DEFAULT << std::endl;
-				for (int i = 0; i < size(); ++i)
+					std::cout << COLOR_YELLOW << "Vector constructor with attributes" << COLOR_DEFAULT << std::endl;
+				_array = _alloc.allocate(n);	
+				for (size_type i = 0; i < n; i++)
+					_alloc.construct(&(_array[i]), val);
+			}
+
+			//constructor with attributes (range)
+			template <class InputIterator>
+			vector(InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type(), \
+				typename ft::enable_if<!ft::is_integral<InputIterator>::value, \
+				InputIterator>::type* = 0) : _size(0),_capacity(0), _alloc(alloc)  
+			{
+				if (M_DEBUG)
+					std::cout << COLOR_YELLOW << "Vector constructor with attributes (range)" << COLOR_DEFAULT << std::endl;
+				InputIterator it = first;
+				while (it != last)
 				{
-					_array[i] = value;
-				}
+					_size++;
+					it++;
+				}	
+				_array = _alloc.allocate(_size);
+				for (size_type i = 0; i < _size; i++)
+					_alloc.construct(&(_array[i]), *first++);
+				_capacity = _size;
 			}
 
 			//copy constructor
-			vector(const vector& rhs) : _size(rhs._size), _capacity(rhs._capacity), _array(new int[_capacity])
+			vector(const vector& rhs) : _size(rhs._size),_capacity(rhs._capacity), _alloc(rhs._alloc)  
 			{
 				if (M_DEBUG)
 					std::cout << COLOR_YELLOW << "Vector copy constructor" << COLOR_DEFAULT << std::endl;
-				for (int i = 0; i < rhs.size(); ++i)
-				{
-					_array[i] = rhs._array[i];
-				}
+				_array = _alloc.allocate(_capacity);
+				for (size_type i = 0; i < _size; i++)
+					_alloc.construct(&(_array[i]), rhs[i]);
 			}
 
 			//copy assigment operator overload
-			vector& operator=(const vector &rhs)
-			{
+			vector &operator=(const vector& rhs) 
+			{	
 				if (M_DEBUG)
 					std::cout << COLOR_YELLOW << "Vector copy assigment operator overload" << COLOR_DEFAULT << std::endl;
-				if (rhs._size > _size)
+				if (_array != rhs._array)
 				{
-					delete[] _array;
-					this->_capacity = rhs._capacity + 5;
-					this->_array = new int[_capacity];
+					_alloc = rhs._alloc;
+					assign(rhs.begin(), rhs.end());
 				}
-				for (int i = 0; i < rhs.size(); ++i)
-				{
-					_array[i] = rhs._array[i];
-				}
-				this->_size = rhs._size;
 				return (*this);
 			}
 
-			~vector(void)
+
+/*---------------------------DESTRUCTOR----------------------------------------*/
+
+			
+			~vector(void) 
 			{
 				if (M_DEBUG)
 					std::cout << COLOR_YELLOW << "Vector default destructor" << COLOR_DEFAULT << std::endl;
-				std::cout << "size: " << this->_size << " capacity: " << _capacity << std::endl;
-				if (_capacity > 0)
-					delete[] _array;
+				for (size_type i = 0; i < _size; i++)
+					_alloc.destroy(&(_array[i]));
+				_alloc.deallocate(_array, _capacity);
 			}
 
-			// //Iterator for vector https://www.youtube.com/watch?v=F9eDv-YIOQ0
-			// VectorIterator begin()
-			// {
-			// 	return (VectorIterator(_data));
-			// }
-
-			// VectorIterator end()
-			// {
-			// 	return (VectorIterator(_data + _size));
-			// }
-
+/*-------PRIVATES ATTRIBUTES-----------*/
 		private:
 			size_t			_size;
 			size_t			_capacity;
 			pointer			_array; //same as T*
 			allocator_type	_alloc;
+
+/*-------HELPER FUNCTIONS---------------------------*/
 
 		//reallocates the memory given by the new capacity
 		void realloc(size_type new_capacity, value_type val = value_type())
@@ -124,9 +133,9 @@ namespace ft {
 		}
 			
 
-		public:
 
 /*----------ITERATOR FUNCTIONS---------------------*/
+		public:
 			iterator begin(void) { return( iterator(_array) ); }
 			iterator end(void) { return(iterator(_array + _size)); }
 			const_iterator begin(void) const { return( const_iterator(_array)); }
@@ -340,29 +349,42 @@ namespace ft {
 			{
 				if (M_DEBUG)
 					std::cout << COLOR_YELLOW << "Vector clear" << COLOR_DEFAULT << std::endl;
+				for (size_type i = 0; i < _size; i++)
+					_alloc.destroy(&(_array[i]));
 				_size = 0;
 			}
 
-			void push_back(int value)
+			/*https://cplusplus.com/reference/vector/vector/resize/*/
+			void resize(size_type n, value_type val = value_type())
+			{
+				if (M_DEBUG)
+					std::cout << COLOR_YELLOW << "Vector rezize" << std::endl;
+				if (n < _size)
+					for (size_type i = n - 1; i < _size; i++)
+						_alloc.destroy(&(_array[i]));
+				else if (n > _size)
+					for (size_type i = _size; i < n; i++)
+						_alloc.construct(&(_array[i]), val);
+				else if (n > _capacity)
+				{
+					size_type tmp_capacity = _capacity;
+					while (tmp_capacity < n)
+						tmp_capacity *= 2;
+					realloc(tmp_capacity, val);
+				}
+				_size = n;
+			}
+
+			void push_back(const value_type& val)
 			{
 				if (M_DEBUG)
 					std::cout << COLOR_YELLOW << "Vector push_back" << COLOR_DEFAULT << std::endl;
-				if (_size < _capacity)
-				{
-					_array[_size] = value;
-					_size++;
-				}
-				else
-				{
-					_capacity *= 2;
-					int *newArray = new int[_capacity];
-					for (size_t i = 0; i < _size; ++i)
-						newArray[i] = _array[i];
-					_array[_size] = value;
-					_size++;
-					delete [] _array;
-					_array = newArray;
-				}
+				if (!_capacity)
+					realloc(1);
+				if (_size == _capacity)
+					realloc(_capacity * 2);
+				_alloc.construct(_array + _size, val);
+				this->_size++;
 			}
 
 			void pop_back(void)
@@ -441,6 +463,7 @@ namespace ft {
 
 /*----------OPERATORS (non member)---------------------*/
 
+
 	template< class T, class Alloc >
 	bool operator!=( const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs ) 
 	{
@@ -448,7 +471,7 @@ namespace ft {
 			std::cout << COLOR_YELLOW << "operator!=" << COLOR_DEFAULT << std::endl;	
 		return (!(lhs == rhs));
 	}
-/*
+
 	template< class T, class Alloc >
 	bool operator==( const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs ) 
 	{
@@ -489,7 +512,13 @@ namespace ft {
 		if (M_DEBUG)
 			std::cout << COLOR_YELLOW << "operator>=" << COLOR_DEFAULT << std::endl;	
 		return (!(lhs < rhs));
-	}*/
+	}
+
+	template< class T, class Alloc >
+	void swap(ft::vector<T,Alloc>& lhs, ft::vector<T,Alloc>& rhs ) {
+		
+		lhs.swap(rhs);
+	}
 
 }//namespace
 
