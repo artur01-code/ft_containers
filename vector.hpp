@@ -510,10 +510,30 @@ namespace ft {
 			{
 				if (M_DEBUG)
 					std::cout << COLOR_YELLOW << "Vector pop_back" << COLOR_DEFAULT << std::endl;
-				if (_size == 0)
-					throw std::out_of_range("Poping back on empty vector");
-				--_size;
-				//this->erase(this->_end - 1);
+				if (!_size)
+					return;
+				_alloc.destroy(&(_array[_size - 1]));
+				_size--;
+			}
+
+			void swap (vector& x) 
+			{
+				if (M_DEBUG)
+					std::cout << COLOR_YELLOW << "Vector swap" << COLOR_DEFAULT << std::endl;
+				pointer tmp_ptr = _array;
+				allocator_type tmp_alloc = _alloc;
+				size_type tmp_size = _size;
+				size_type tmp_capacity = _capacity;
+				
+				_array = x._array;
+				_alloc = x._alloc;
+				_size = x._size;
+				_capacity = x._capacity;
+				
+				x._array = tmp_ptr;
+				x._alloc = tmp_alloc;
+				x._size = tmp_size;
+				x._capacity = tmp_capacity;
 			}
 
 			bool empty(void) const
@@ -639,13 +659,16 @@ namespace ft {
 			std::cout << COLOR_YELLOW << "operator>=" << COLOR_DEFAULT << std::endl;	
 		return (!(lhs < rhs));
 	}
+}//namespace
+
+
+namespace std {
 
 	template< class T, class Alloc >
 	void swap(ft::vector<T,Alloc>& lhs, ft::vector<T,Alloc>& rhs ) {
 		
 		lhs.swap(rhs);
 	}
-
-}//namespace
+} // namespace std
 
 #endif
