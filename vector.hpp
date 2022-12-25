@@ -455,6 +455,45 @@ namespace ft {
 				_capacity = new_cap;
 			}
 
+			//https://cplusplus.com/reference/vector/vector/assign/
+			//destorys the array and creates a new given by the passed range
+			template< class InputIterator >
+			void assign(InputIterator first, InputIterator last,
+				typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type* = 0) 
+			{
+				
+				for (size_type i = 0; i < _size; i++)
+					_alloc.destroy(&(_array[i]));
+				size_type new_size = 0;
+				InputIterator tmp = first;
+				while (tmp++ != last)
+					new_size++;
+				if (new_size > _capacity)
+					realloc(new_size);
+				for (size_type i = 0; i < new_size; i++)
+					_alloc.construct(&(_array[i]), *first++);
+				if (new_size < _size)
+				{
+					for (size_type i = new_size; i < _size; i++)
+						_alloc.destroy(&(_array[i]));
+				}
+				_size = new_size;
+			}
+
+			//destroys the content of the array and replaces it with the new count times
+			void assign(size_type count, const T& value) 
+			{
+				if (M_DEBUG)
+					std::cout << COLOR_YELLOW << "Vector assign" << COLOR_DEFAULT << std::endl;
+				for (size_type i = 0; i < _size; i++)
+					_alloc.destroy(&(_array[i]));
+				if (_size < count)
+					realloc(count);
+				for (size_type i = 0; i < count; i++)
+					_alloc.construct(&(_array[i]), value);
+				_size = count;
+			}
+
 			void push_back(const value_type& val)
 			{
 				if (M_DEBUG)

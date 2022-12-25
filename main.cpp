@@ -284,6 +284,22 @@ int main(void)
 
 /*---------------------------------------------------------------------------------------------------*/
 	std::cout << std::endl << std::string(60, '-') << std::endl;
+	/*-----VEC_ORI assign()-----*/
+	std::cout << COLOR_RED << "assign()" << COLOR_DEFAULT << std::endl;
+	int array[] = {111, 222, 333, 444, 555, 666, 777, 888, 999};
+	vec_ori.assign(array, array + 8);
+	for (std::vector<int>::iterator iter = vec_ori.begin(); iter != vec_ori.end(); iter++)
+		std::cout << *iter << " ";
+	std::cout << " | | " << std::endl;
+
+
+	/*-----VEC_OWN assign()-----*/
+	std::cout << COLOR_GREEN << "assign()" << COLOR_DEFAULT << std::endl;
+	vec_own.assign(array, array + 8);
+	print_varray(vec_own);
+
+/*---------------------------------------------------------------------------------------------------*/
+	std::cout << std::endl << std::string(60, '-') << std::endl;
 	/*-----VEC_ORI clear()-----*/
 	std::cout << COLOR_RED << "clear()" << COLOR_DEFAULT << std::endl;
 	vec_ori.clear();
