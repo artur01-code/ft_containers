@@ -1,5 +1,8 @@
 NAME	= ft_containers
-SRCS	= tests/test_vector.cpp
+
+SRCS_VEC	= tests/test_vector.cpp
+SRCS_RBT	= tests/test_RBT.cpp
+SRCS_ALL	= $(SRCS_VEC) $(SRCS_RBT)
 
 CC		= c++
 FLAGS	= -Wall -Wextra -Werror -std=c++98 -pedantic
@@ -7,10 +10,22 @@ FLAGS	= -Wall -Wextra -Werror -std=c++98 -pedantic
 all:		${NAME}
 
 ${NAME}:
-			${CC} ${SRCS} ${FLAGS} -o ${NAME}
+			${CC} ${SRCS_ALL} ${FLAGS} -o ${NAME}
+
+vector:
+	${CC} ${SRCS_VEC} ${FLAGS} -o ${NAME}
+
+rbt:
+	${CC} ${SRCS_RBT} ${FLAGS} -o ${NAME}
 
 debug: all
-			${CC} ${SRCS} ${FLAGS} -D M_DEBUG=1 -o ${NAME}
+			${CC} ${SRCS_ALL} ${FLAGS} -D M_DEBUG=1 -o ${NAME}
+
+debug_vector:
+			${CC} ${SRCS_VEC} ${FLAGS} -D M_DEBUG=1 -o ${NAME}
+
+debug_rbt:
+			${CC} ${SRCS_RBT} ${FLAGS} -D M_DEBUG=1 -o ${NAME}
 
 docker:
 	docker run -ti -v $(PWD):/test memory-test:0.1 bash -c "cd /test/; make re && valgrind --leak-check=full ./${NAME} 12"
