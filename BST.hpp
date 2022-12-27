@@ -56,7 +56,7 @@ namespace ft{
 				_size = other._size;
 				_alloc = other._alloc;
 				_node_alloc = other._node_alloc;
-				return *this;
+				return (*this);
 			}
 
 			~BST()
@@ -68,22 +68,22 @@ namespace ft{
 
 			bool empty() const
 			{ 
-				return this->_size == 0; 
+				return (this->_size == 0); 
 			}
 
 			size_type size() const
 			{ 
-				return this->_size; 
+				return (this->_size); 
 			}
 
 			size_type max_size() const
 			{
-				return(this->_alloc.max_size());
+				return (this->_alloc.max_size());
 			}
 
 			node* getRoot() const
 			{
-				return this->_bst;
+				return (this->_bst);
 			}
 
 			node* getToRoot() const
@@ -91,17 +91,17 @@ namespace ft{
 				node* tmp = _bst;
 				while(tmp->parent)
 					tmp = tmp->parent;
-				return tmp;
+				return (tmp);
 			}
 
 			bool _isLeaf(node *bst) const
 			{
-				return bst->left == NULL && bst->right == NULL;
+				return (bst->left == NULL && bst->right == NULL);
 			}
 
 			bool _isEmpty(node *bst) const
 			{
-				return bst == NULL;
+				return (bst == NULL);
 			}
 
 			void _printMap(node* root)
@@ -128,7 +128,7 @@ namespace ft{
 				node* current = bst;
 				while (current && current->left != NULL)
 					current = current->left;
-				return current;
+				return (current);
 			}
 
 			node* 	maxNode(node* bst) const
@@ -136,7 +136,7 @@ namespace ft{
 				node* current = bst;
 				while (current && current->right != NULL)
 					current = current->right;
-				return current;
+				return (current);
 			}
 
 			node *_new_node(const value_type &value, node* parent = NULL)
@@ -147,7 +147,7 @@ namespace ft{
 				new_node->right = NULL;
 				new_node->parent = parent;
 				_size++;
-				return(new_node);
+				return (new_node);
 			}
 
 			void copyTree(node* rt = NULL)
@@ -191,20 +191,20 @@ namespace ft{
 					else
 						res = res->right;
 				}
-				return res;
+				return (res);
 			}
 
 			node* _insert(const value_type& value)
 			{
 				if(!_bst){
 					_bst = _new_node(value);
-					return _bst;
+					return (_bst);
 				}
 				node* found;
 				node* tmp;
 				found = _findNode(value.first);
 				if(found)
-					return found;
+					return (found);
 				tmp = NULL;
 				found = _bst;
 				while(found != NULL){
@@ -219,7 +219,7 @@ namespace ft{
 					tmp->left = found;
 				else
 					tmp->right = found;
-				return found;
+				return (found);
 			}
 
 			void changeData(node* &curr, const value_type& val)
@@ -249,9 +249,9 @@ namespace ft{
 			{	
 				node*	found = _findNode(key);
 				if(!_bst || !found)
-					return 0;
+					return (0);
 				_deleteNode(found);
-				return 1;
+				return (1);
 			}
 
 			node*	begin(void) const
@@ -290,10 +290,16 @@ namespace ft{
 	};
 
 	template <class value>
-	value extract_key(value v) {return v;}
+	value extract_key(value v)
+	{
+		return v;
+	}
 
 	template <class first, class second>
-	first extract_key(ft::pair<first, second> pair){ return pair.first;}
+	first extract_key(ft::pair<first, second> pair)
+	{
+		return pair.first;
+	}
 
 } //end namepsace
 

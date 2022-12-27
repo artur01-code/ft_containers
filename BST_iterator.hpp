@@ -49,17 +49,17 @@ namespace ft{
 
 			BST_node getPtr() const 
 			{
-				return this->_p;
+				return (this->_p);
 			}
 
 			BST_node getf() const 
 			{
-				return this->_first;
+				return (this->_first);
 			}
 
 			BST_node getl() const 
 			{
-				return this->_last;
+				return (this->_last);
 			}
 
 			BST_iter& operator=(const BST_iter& other)
@@ -67,7 +67,7 @@ namespace ft{
 				_p = other.getPtr();
 				_first = other.getf();
 				_last = other.getl();
-				return *this;
+				return (*this);
 			}
 
 			const BST_iter& operator=(const BST_iter& other) const
@@ -75,7 +75,7 @@ namespace ft{
 				_p = other.getPtr();
 				_first = other.getf();
 				_last = other.getl();
-				return *this;
+				return (*this);
 			}
 
 			BST_iter& operator++()
@@ -95,7 +95,7 @@ namespace ft{
 					}
 					_p = tmp;
 				}
-				return *this;
+				return (*this);
 			}
 
 			const BST_iter& operator++() const
@@ -115,21 +115,21 @@ namespace ft{
 					}
 					_p = tmp;
 				}
-				return *this;
+				return (*this);
 			}
 
 			BST_iter operator++(int)
 			{
 				BST_iter tmp = *this;
 				++(*this);
-				return tmp;
+				return (tmp);
 			}
 
 			const BST_iter operator++(int) const
 			{
 				BST_iter tmp = *this;
 				++(*this);
-				return tmp;
+				return (tmp);
 			}
 
 			BST_iter& operator--()
@@ -149,7 +149,7 @@ namespace ft{
 					}
 					_p = tmp;
 				}
-				return *this;
+				return (*this);
 			}
 
 			const BST_iter& operator--() const
@@ -169,7 +169,7 @@ namespace ft{
 					}
 					_p = tmp;
 				}
-				return *this;
+				return (*this);
 			}
 
 
@@ -177,14 +177,14 @@ namespace ft{
 			{
 				BST_iter tmp = *this;
 				--(*this);
-				return tmp;
+				return (tmp);
 			}
 
 			const BST_iter operator--(int) const
 			{
 				BST_iter tmp = *this;
 				--(*this);
-				return tmp;
+				return (tmp);
 			}
 
 			value_type* operator->()
@@ -209,7 +209,7 @@ namespace ft{
 
 			friend bool operator==(const BST_iter<key_type, mapped_type>& lhs, const BST_iter<key_type, mapped_type>& rhs)
 			{
-				return lhs.getPtr() == rhs.getPtr();
+				return (lhs.getPtr() == rhs.getPtr());
 			}
 
 			friend bool operator!=(const BST_iter<key_type, mapped_type>& lhs, const BST_iter<key_type, mapped_type>& rhs)
@@ -259,17 +259,17 @@ namespace ft{
 
 			BST_node getPtr() const 
 			{
-				return this->_p;
+				return (this->_p);
 			}
 
 			BST_node getf() const 
 			{
-				return this->_first;
+				return (this->_first);
 			}
 
 			BST_node getl() const 
 			{
-				return this->_last;
+				return (this->_last);
 			}
 
 			reverse_BST_iter& operator=(const reverse_BST_iter& other)
@@ -277,7 +277,7 @@ namespace ft{
 				_p = other.getPtr();
 				_first = other.getf();
 				_last = other.getl();
-				return *this;
+				return (*this);
 			}
 
 			const reverse_BST_iter& operator=(const reverse_BST_iter& other) const
@@ -285,7 +285,7 @@ namespace ft{
 				_p = other.getPtr();
 				_first = other.getf();
 				_last = other.getl();
-				return *this;
+				return (*this);
 			}
 
 			reverse_BST_iter& operator--()
@@ -305,7 +305,7 @@ namespace ft{
 					}
 					_p = tmp;
 				}
-				return *this;
+				return (*this);
 			}
 
 			const reverse_BST_iter& operator--() const
@@ -325,21 +325,21 @@ namespace ft{
 					}
 					_p = tmp;
 				}
-				return *this;
+				return (*this);
 			}
 
 			reverse_BST_iter operator++(int)
 			{
 				reverse_BST_iter tmp = *this;
 				++(*this);
-				return tmp;
+				return (tmp);
 			}
 
 			const reverse_BST_iter operator++(int) const
 			{
 				reverse_BST_iter tmp = *this;
 				++(*this);
-				return tmp;
+				return (tmp);
 			}
 
 			reverse_BST_iter& operator++()
@@ -359,7 +359,7 @@ namespace ft{
 					}
 					_p = tmp;
 				}
-				return *this;
+				return (*this);
 			}
 
 			const reverse_BST_iter& operator++() const
@@ -379,7 +379,7 @@ namespace ft{
 					}
 					_p = tmp;
 				}
-				return *this;
+				return (*this);
 			}
 
 
@@ -387,14 +387,14 @@ namespace ft{
 			{
 				reverse_BST_iter tmp = *this;
 				--(*this);
-				return tmp;
+				return (tmp);
 			}
 
 			const reverse_BST_iter operator--(int) const
 			{
 				reverse_BST_iter tmp = *this;
 				--(*this);
-				return tmp;
+				return (tmp);
 			}
 
 			value_type* operator->()
@@ -419,7 +419,7 @@ namespace ft{
 
 			friend bool operator==(const reverse_BST_iter<key_type, mapped_type>& lhs, const reverse_BST_iter<key_type, mapped_type>& rhs)
 			{
-				return lhs.getPtr() == rhs.getPtr();
+				return (lhs.getPtr() == rhs.getPtr());
 			}
 
 			friend bool operator!=(const reverse_BST_iter<key_type, mapped_type>& lhs, const reverse_BST_iter<key_type, mapped_type>& rhs)
