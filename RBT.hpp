@@ -12,6 +12,7 @@
 #define BLACK false
 
 /*Intro to RBT: https://www.youtube.com/watch?v=qvZGUFHWChY*/
+/*https://medium.com/@ben.tom.vincent/why-use-a-red-black-tree-over-a-regular-binary-search-tree-a63857916907*/
 
 namespace ft
 {
@@ -101,6 +102,36 @@ namespace ft
 		~RBT()
 		{
 
+		}
+
+/*---------ITERATOR FUNCTIONS-----------------*/
+		iterator begin()
+		{
+			return (iterator(this->minimum(this->_root), this->_end, this->_rend));
+		}
+
+		const_iterator begin() const
+		{
+			return(const_iterator(this->minimum(this->_root), this->_end, this->_rend));
+		}
+
+		iterator end()
+		{
+			return (iterator(this->_end, this->_end, this->_rend));
+		}
+
+		const_iterator end()  const
+		{
+			return (const_iterator(this->_end, this->_end, this->_rend));
+		}
+		iterator rend()
+		{
+			return (iterator(this->_rend, this->_end, this->_rend));
+		}
+
+		const_iterator rend()  const
+		{
+			return (const_iterator(this->_rend, this->_end, this->_end));
 		}
 
 /*--------HELPER---------------------------*/
