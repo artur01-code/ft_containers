@@ -37,8 +37,9 @@ namespace ft
 			key_compare					_comp;
 			allocator_type				_alloc;
 
-		public:
 
+/*-----------CONSTRUCTORS--------------------*/
+		public:
 
 			explicit map(const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()):
 				_bst(), _comp(comp), _alloc(alloc)
@@ -76,6 +77,7 @@ namespace ft
 				return (*this);
 			}
 
+/*-------------HELPER CLASS-----------------------------*/
 			class value_compare
 			{
 				friend class map;
@@ -98,34 +100,8 @@ namespace ft
 					}
 			};
 
-			allocator_type get_allocator() const
-			{
-				return (this->_alloc);
-			}
+/*------------ITERATOR FUNCTIONS--------------------------*/
 
-			mapped_type& at(const key_type& key)
-			{
-				iterator tmp = find(key);
-				if(tmp == end())
-					throw std::out_of_range("map::at");
-				else
-					return (tmp->second);
-			}
-
-			const mapped_type& at(const key_type& key) const
-			{
-				iterator tmp = find(key);
-				if(tmp == end())
-					throw std::out_of_range("map::at");
-				else
-					return (tmp->second);
-			}
-
-			mapped_type& operator[](const key_type& key)
-			{
-				return ((*((this->insert(ft::make_pair(key,mapped_type()))).first)).second);
-			}
-				
 			iterator begin()
 			{
 				return (iterator(_bst.begin(), _bst.begin(), _bst.rbegin()));
@@ -165,6 +141,23 @@ namespace ft
 				return (const_reverse_iterator(NULL, _bst.begin(), _bst.rbegin()));
 			}
 
+/*------------HELPER--------------------------------*/
+
+			allocator_type get_allocator() const
+			{
+				return (this->_alloc);
+			}
+
+			key_compare key_comp() const
+			{
+				return (this->_comp);
+			}
+
+			value_compare value_comp() const
+			{
+				return (value_compare(_comp));
+			}
+
 			bool empty() const
 			{
 				return (this->_bst.size() == 0);
@@ -185,15 +178,6 @@ namespace ft
 				_bst._clear(_bst.getRoot());
 			}
 
-			ft::pair<iterator, bool> insert(const value_type& value)
-			{
-				iterator it(_bst._insert(value));
-				if(it != iterator())
-					return (ft::make_pair(it, true));
-				else
-					return (ft::make_pair(it, false));
-			}
-
 			void printMap()
 			{
 				this->_bst._printMap(_bst.getRoot());
@@ -203,6 +187,40 @@ namespace ft
 			void minNmax()
 			{
 				this->_bst._minNmax();
+			}
+
+/*------------FUNCTIONS--------------------------------*/
+
+			mapped_type& at(const key_type& key)
+			{
+				iterator tmp = find(key);
+				if(tmp == end())
+					throw std::out_of_range("map::at");
+				else
+					return (tmp->second);
+			}
+
+			const mapped_type& at(const key_type& key) const
+			{
+				iterator tmp = find(key);
+				if(tmp == end())
+					throw std::out_of_range("map::at");
+				else
+					return (tmp->second);
+			}
+
+			mapped_type& operator[](const key_type& key)
+			{
+				return ((*((this->insert(ft::make_pair(key,mapped_type()))).first)).second);
+			}
+
+			ft::pair<iterator, bool> insert(const value_type& value)
+			{
+				iterator it(_bst._insert(value));
+				if(it != iterator())
+					return (ft::make_pair(it, true));
+				else
+					return (ft::make_pair(it, false));
 			}
 
 			iterator insert(iterator hint, const value_type& value)
@@ -316,17 +334,9 @@ namespace ft
 				return (it);
 			}
 
-			key_compare key_comp() const
-			{
-				return (this->_comp);
-			}
-
-			value_compare value_comp() const
-			{
-				return (value_compare(_comp));
-			}
-
 	}; //class
+
+/*--------SWAP & OPERATORS-----------------------------------*/
 
 	template< class Key, class T, class Compare, class Alloc >
 	void swap(ft::map<Key,T,Compare,Alloc>& lhs, ft::map<Key,T,Compare,Alloc>& rhs)

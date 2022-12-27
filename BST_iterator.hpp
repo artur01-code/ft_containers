@@ -6,8 +6,8 @@
 #include "utils.hpp"
 #include "BST.hpp"
 
-namespace ft{
-
+namespace ft
+{
 	template <typename key, typename T>
 	class BST_iter : public std::iterator<std::bidirectional_iterator_tag, T>
 	{
@@ -25,6 +25,7 @@ namespace ft{
 			mutable BST_node _first;
 			mutable BST_node _last;
 		
+/*-------CONSTRUCTORS-------------------------------------------*/
 		public:
 
 			BST_iter(): _p(NULL), _first(NULL), _last(NULL)
@@ -46,6 +47,8 @@ namespace ft{
 			{
 
 			}
+	
+/*-----------GETTER-------------------------------*/
 
 			BST_node getPtr() const 
 			{
@@ -61,6 +64,8 @@ namespace ft{
 			{
 				return (this->_last);
 			}
+	
+/*-----------OPERATORS-------------------------------------*/
 
 			BST_iter& operator=(const BST_iter& other)
 			{
@@ -218,6 +223,8 @@ namespace ft{
 			}
 	};
 
+/*----------REVERSITERATOR--------------------------------------------------*/
+
 	template <typename key, typename T>
 	class reverse_BST_iter : public std::iterator<std::bidirectional_iterator_tag, T>
 	{
@@ -235,6 +242,7 @@ namespace ft{
 			mutable BST_node _first;
 			mutable BST_node _last;
 		
+/*--------CONSTRUCTORS-----------------------------------*/
 		public:
 
 			reverse_BST_iter(): _p(NULL), _first(NULL), _last(NULL)
@@ -256,6 +264,8 @@ namespace ft{
 			{
 
 			}
+		
+/*-----------GETTER------------------------------*/
 
 			BST_node getPtr() const 
 			{
@@ -271,6 +281,8 @@ namespace ft{
 			{
 				return (this->_last);
 			}
+
+/*------------OPERATORS--------------------------------*/
 
 			reverse_BST_iter& operator=(const reverse_BST_iter& other)
 			{

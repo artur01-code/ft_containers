@@ -64,7 +64,7 @@ namespace ft{
 
 			}
 
-/*-----------FUNCTIONS--------------------*/
+/*-----------HELPER--------------------*/
 
 			bool empty() const
 			{ 
@@ -158,6 +158,42 @@ namespace ft{
 				copyTree(rt->left);
 				copyTree(rt->right);
 			}
+
+			node*	begin(void) const
+			{
+				node*	tmp = this->_bst;
+				while (tmp && tmp->left)
+					tmp = tmp->left;
+				return (tmp);
+			}
+
+			node*	end(void) const
+			{
+				node*	tmp = this->_bst;
+				while (tmp && tmp->right)
+					tmp = tmp->right;
+				tmp = tmp->right;
+				return (tmp);
+			}
+			
+			node*	rbegin(void) const
+			{
+				node*	tmp = this->_bst;
+				while (tmp && tmp->right)
+					tmp = tmp->right;
+				return (tmp);
+			}
+
+			node*	rend(void) const
+			{
+				node*	tmp = this->_bst;
+				while (tmp && tmp->left)
+					tmp = tmp->left;
+				tmp = tmp->left;
+				return (tmp);
+			}
+
+/*------------FUNCTIONS--------------------------------*/
 
 			void _clear(node* nd = NULL)
 			{
@@ -253,52 +289,18 @@ namespace ft{
 				_deleteNode(found);
 				return (1);
 			}
-
-			node*	begin(void) const
-			{
-				node*	tmp = this->_bst;
-				while (tmp && tmp->left)
-					tmp = tmp->left;
-				return (tmp);
-			}
-
-			node*	end(void) const
-			{
-				node*	tmp = this->_bst;
-				while (tmp && tmp->right)
-					tmp = tmp->right;
-				tmp = tmp->right;
-				return (tmp);
-			}
-			
-			node*	rbegin(void) const
-			{
-				node*	tmp = this->_bst;
-				while (tmp && tmp->right)
-					tmp = tmp->right;
-				return (tmp);
-			}
-
-			node*	rend(void) const
-			{
-				node*	tmp = this->_bst;
-				while (tmp && tmp->left)
-					tmp = tmp->left;
-				tmp = tmp->left;
-				return (tmp);
-			}
-	};
+	}; //class
 
 	template <class value>
 	value extract_key(value v)
 	{
-		return v;
+		return (v);
 	}
 
 	template <class first, class second>
 	first extract_key(ft::pair<first, second> pair)
 	{
-		return pair.first;
+		return (pair.first);
 	}
 
 } //end namepsace
