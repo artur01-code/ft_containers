@@ -1,7 +1,8 @@
 NAME	= ft_containers
 
+
 SRCS_VEC	= tests/test_vector.cpp
-SRCS_ALL	= $(SRCS_VEC) $(SRCS_RBT)
+SRCS_ALL	= $(SRCS_VEC) 
 
 CC		= c++
 FLAGS	= -Wall -Wextra -Werror -std=c++98 -pedantic
