@@ -157,6 +157,28 @@ int main(void)
 
 	/*---------------------------------------------------------------------------------------------------*/
 	std::cout << std::endl << std::string(60, '-') << std::endl;
+	/*-----MAP_ORI upper_bound()-----*/
+	std::cout << COLOR_RED << "map_ori.upper_bound(five)" << COLOR_DEFAULT << std::endl;
+	it_ori = map_ori.upper_bound("five");
+	std::cout << it_ori->first << "	|	" << it_ori->second << std::endl;
+
+	/*-----MAP_OWN upper_bound()-----*/
+	std::cout << COLOR_GREEN << "map_own.upper_bound(five)" << COLOR_DEFAULT << std::endl;
+	std::cout << map_own.upper_bound("five")->first << "	|	" << map_own.upper_bound("five")->second << std::endl;
+
+	/*---------------------------------------------------------------------------------------------------*/
+	std::cout << std::endl << std::string(60, '-') << std::endl;
+	/*-----MAP_ORI upper_bound()-----*/
+	std::cout << COLOR_RED << "map_ori.lower_bound(five)" << COLOR_DEFAULT << std::endl;
+	it_ori = map_ori.lower_bound("five");
+	std::cout << it_ori->first << "	|	" << it_ori->second << std::endl;
+
+	/*-----MAP_OWN lower_bound()-----*/
+	std::cout << COLOR_GREEN << "map_own.lower_bound(five)" << COLOR_DEFAULT << std::endl;
+	std::cout << map_own.lower_bound("five")->first << "	|	" << map_own.lower_bound("five")->second << std::endl;
+
+	/*---------------------------------------------------------------------------------------------------*/
+	std::cout << std::endl << std::string(60, '-') << std::endl;
 	/*-----MAP_ORI THIS IS A SAMPLE-----*/
 	std::cout << COLOR_RED << "THIS IS A SAMPLE" << COLOR_DEFAULT << std::endl;
 
