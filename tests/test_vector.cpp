@@ -25,6 +25,7 @@ int main(void)
 	std::cout << COLOR_RED << "\n\noriginal vector		" << COLOR_DEFAULT "|	" << COLOR_DEFAULT;
 	std::cout << COLOR_GREEN << "my own vector\n" << COLOR_DEFAULT << std::endl;
 	std::cout << COLOR_YELLOW << "Debug messages\n\n" << COLOR_DEFAULT << std::endl;
+	std::cout << COLOR_MAGENTA << "Stuff to fix\n\n" << COLOR_DEFAULT << std::endl;
 
 /*---------------------------------------------------------------------------------------------------*/
 	std::cout << std::string(60, '-') << std::endl;

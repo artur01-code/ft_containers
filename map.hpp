@@ -218,7 +218,7 @@ namespace ft
 			ft::pair<iterator, bool> insert(const value_type& value)
 			{
 				iterator it(_bst._insert(value));
-				if(it != iterator())
+				if (it != iterator())
 					return (ft::make_pair(it, true));
 				else
 					return (ft::make_pair(it, false));
@@ -226,7 +226,7 @@ namespace ft
 
 			iterator insert(iterator hint, const value_type& value)
 			{
-				if(hint != iterator())
+				if (hint != iterator())
 					return (this->_bst._insert(value));
 				return (iterator());
 			}

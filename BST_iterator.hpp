@@ -192,6 +192,12 @@ namespace ft
 				return (tmp);
 			}
 
+			// BST_iter operator-=(int value)
+			// {
+			// 	for (; value != 0; value--)
+			// 		(*this)--;
+			// }
+
 			value_type* operator->()
 			{
 				return (&(_p->data));
@@ -339,6 +345,12 @@ namespace ft
 				}
 				return (*this);
 			}
+
+			// reverse_BST_iter operator-=(int value)
+			// {
+			// 	for (; value != 0; value--)
+			// 		(*this)--;
+			// }
 
 			reverse_BST_iter operator++(int)
 			{
