@@ -1,6 +1,6 @@
 NAME	= ft_containers
 
-
+SRCS_MAP	= tests/test_map.cpp
 SRCS_VEC	= tests/test_vector.cpp
 SRCS_ALL	= $(SRCS_VEC) 
 
@@ -15,11 +15,17 @@ ${NAME}:
 vector:
 	${CC} ${SRCS_VEC} ${FLAGS} -o ${NAME}
 
+map:
+	${CC} ${SRCS_MAP} ${FLAGS} -o ${NAME}
+
 debug: all
 			${CC} ${SRCS_ALL} ${FLAGS} -D M_DEBUG=1 -o ${NAME}
 
 debug_vector:
 			${CC} ${SRCS_VEC} ${FLAGS} -D M_DEBUG=1 -o ${NAME}
+
+debug_map:
+			${CC} ${SRCS_MAP} ${FLAGS} -D M_DEBUG=1 -o ${NAME}
 
 docker:
 	docker run -ti -v $(PWD):/test memory-test:0.1 bash -c "cd /test/; make re && valgrind --leak-check=full ./${NAME} 12"

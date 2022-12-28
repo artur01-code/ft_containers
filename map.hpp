@@ -44,7 +44,8 @@ namespace ft
 			explicit map(const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()):
 				_bst(), _comp(comp), _alloc(alloc)
 			{
-
+				if (M_DEBUG)
+					std::cout << COLOR_YELLOW << "Map default constructor" << COLOR_DEFAULT << std::endl;
 			}
 
 			template< class InputIt >
