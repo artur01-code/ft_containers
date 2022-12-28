@@ -38,7 +38,7 @@ namespace ft
 			allocator_type				_alloc;
 
 
-/*-----------CONSTRUCTORS--------------------*/
+/*-----------CONSTRUCTORS-----------------------------------------------------------------------------------*/
 		public:
 
 			explicit map(const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()):
@@ -78,7 +78,7 @@ namespace ft
 				return (*this);
 			}
 
-/*-------------HELPER CLASS-----------------------------*/
+/*-------------HELPER CLASS-----------------------------------------------------------------------*/
 			class value_compare
 			{
 				friend class map;
@@ -101,7 +101,7 @@ namespace ft
 					}
 			};
 
-/*------------ITERATOR FUNCTIONS--------------------------*/
+/*------------ITERATOR FUNCTIONS--------------------------------------------------------------------*/
 
 			iterator begin()
 			{
@@ -142,42 +142,7 @@ namespace ft
 				return (const_reverse_iterator(NULL, _bst.begin(), _bst.rbegin()));
 			}
 
-/*------------HELPER--------------------------------*/
-
-			allocator_type get_allocator() const
-			{
-				return (this->_alloc);
-			}
-
-			key_compare key_comp() const
-			{
-				return (this->_comp);
-			}
-
-			value_compare value_comp() const
-			{
-				return (value_compare(_comp));
-			}
-
-			bool empty() const
-			{
-				return (this->_bst.size() == 0);
-			}
-
-			size_type size() const
-			{
-				return (this->_bst.size());
-			}
-
-			size_type max_size() const
-			{
-				return (_bst.max_size());
-			}
-
-			void clear()
-			{
-				_bst._clear(_bst.getRoot());
-			}
+/*------------HELPER-----------------------------------------------------------------------------------------------*/
 
 			void printMap()
 			{
@@ -190,8 +155,54 @@ namespace ft
 				this->_bst._minNmax();
 			}
 
-/*------------FUNCTIONS--------------------------------*/
+/*-----------ACCESS FUNCTIONS--------------------------------------------------------------------------------------*/
 
+			/* Returns a copy of the allocator object associated with the map.*/
+			allocator_type get_allocator() const
+			{
+				return (this->_alloc);
+			}
+
+			/* Returns a copy of the comparison object used by the container to compare keys.*/
+			key_compare key_comp() const
+			{
+				return (this->_comp);
+			}
+
+			/* Returns a comparison object that can be used to compare two elements to get whether
+			 the key of the first one goes before the second.*/
+			value_compare value_comp() const
+			{
+				return (value_compare(_comp));
+			}
+
+			/* Returns whether the map container is empty (i.e. whether its size is 0).*/
+			bool empty() const
+			{
+				return (this->_bst.size() == 0);
+			}
+
+			/* Returns the number of elements in the map container.*/
+			size_type size() const
+			{
+				return (this->_bst.size());
+			}
+
+			/* Returns the maximum number of elements that the map container can hold.*/
+			size_type max_size() const
+			{
+				return (_bst.max_size());
+			}
+
+			/* Removes all elements from the map container (which are destroyed), leaving the container with a size of 0.*/
+			void clear()
+			{
+				_bst._clear(_bst.getRoot());
+			}
+
+/*------------FUNCTIONS--------------------------------------------------------------------------------------------*/
+
+			/* Returns a reference to the mapped value of the element identified with key.*/
 			mapped_type& at(const key_type& key)
 			{
 				iterator tmp = find(key);
@@ -215,6 +226,8 @@ namespace ft
 				return ((*((this->insert(ft::make_pair(key,mapped_type()))).first)).second);
 			}
 
+			/* Extends the container by inserting new elements, effectively increasing the container
+			 size by the number of elements inserted.*/
 			ft::pair<iterator, bool> insert(const value_type& value)
 			{
 				iterator it(_bst._insert(value));
@@ -237,11 +250,13 @@ namespace ft
 					_bst._insert(*first);
 			}
 
+			/* Removes from the map container a single element.*/
 			void erase(iterator pos)
 			{
 				_bst._erase((*pos).first);
 			}
 
+			/* Removes from the map container a range of elements ([first,last)).*/
 			void erase(iterator first, iterator last)
 			{
 				for(; first != last; first++)
@@ -272,6 +287,7 @@ namespace ft
 
 			}
 
+			/* Searches the container for elements with a key equivalent to key and returns the number of matches.*/
 			size_type count(const key_type& key) const
 			{
 				if(!_bst._findNode(key))
@@ -279,6 +295,8 @@ namespace ft
 				return (1);
 			}
 
+			/*Searches the container for an element with a key equivalent to key
+			 and returns an iterator to it if found, otherwise it returns an iterator to map::end.*/
 			iterator find(const key_type& key)
 			{
 				return (iterator(this->_bst._findNode(key)));
@@ -293,6 +311,8 @@ namespace ft
 					return (const_iterator(end()));
 			}
 
+			/*Returns the bounds of a range that includes all the elements in the container which have a key equivalent to k.
+			Because the elements in a map container have unique keys, the range returned will contain a single element at most.*/
 			ft::pair<iterator,iterator> equal_range(const key_type& key)
 			{
 				return (ft::make_pair(lower_bound(key), upper_bound(key)));
@@ -303,6 +323,8 @@ namespace ft
 				return (ft::make_pair(lower_bound(key), upper_bound(key)));
 			}
 
+			/*Returns an iterator pointing to the first element in the container
+			 whose key is not considered to go before key (i.e., either it is equivalent or goes after).*/
 			iterator lower_bound(const key_type& key)
 			{
 				iterator it  = begin();
@@ -319,6 +341,7 @@ namespace ft
 				return (it);
 			}
 
+			/*Returns an iterator pointing to the first element in the container whose key is considered to go after k.*/
 			iterator upper_bound(const key_type& key)
 			{
 				iterator it  = begin();
@@ -337,7 +360,7 @@ namespace ft
 
 	}; //class
 
-/*--------SWAP & OPERATORS-----------------------------------*/
+/*--------SWAP & OPERATORS-----------------------------------------------------------------------------*/
 
 	template< class Key, class T, class Compare, class Alloc >
 	void swap(ft::map<Key,T,Compare,Alloc>& lhs, ft::map<Key,T,Compare,Alloc>& rhs)

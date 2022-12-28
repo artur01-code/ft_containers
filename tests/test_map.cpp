@@ -151,9 +151,8 @@ int main(void)
 
 	/*-----MAP_OWN find()-----*/
 	std::cout << COLOR_GREEN << "map_own.find(one)" << COLOR_DEFAULT << std::endl;
-	// it_own = map_ori.find("one");
-	std::cout << COLOR_MAGENTA << "NO MATCH FOR OPERATOR=" << COLOR_DEFAULT << std::endl;
-	std::cout << map_ori.find("one")->first << "	|	" << map_ori.find("one")->second << std::endl;
+	it_own = map_own.find("one");
+	std::cout << it_own->first << "	|	" << it_own->second << std::endl;
 
 	/*---------------------------------------------------------------------------------------------------*/
 	std::cout << std::endl << std::string(60, '-') << std::endl;
@@ -164,7 +163,8 @@ int main(void)
 
 	/*-----MAP_OWN upper_bound()-----*/
 	std::cout << COLOR_GREEN << "map_own.upper_bound(five)" << COLOR_DEFAULT << std::endl;
-	std::cout << map_own.upper_bound("five")->first << "	|	" << map_own.upper_bound("five")->second << std::endl;
+	it_own = map_own.upper_bound("five");
+	std::cout << it_own->first << "	|	" << it_own->second << std::endl;
 
 	/*---------------------------------------------------------------------------------------------------*/
 	std::cout << std::endl << std::string(60, '-') << std::endl;
@@ -175,7 +175,8 @@ int main(void)
 
 	/*-----MAP_OWN lower_bound()-----*/
 	std::cout << COLOR_GREEN << "map_own.lower_bound(five)" << COLOR_DEFAULT << std::endl;
-	std::cout << map_own.lower_bound("five")->first << "	|	" << map_own.lower_bound("five")->second << std::endl;
+	it_own = map_own.lower_bound("five");
+	std::cout << it_own->first << "	|	" << it_own->second << std::endl;
 
 	/*---------------------------------------------------------------------------------------------------*/
 	std::cout << std::endl << std::string(60, '-') << std::endl;
