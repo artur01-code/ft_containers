@@ -1,9 +1,16 @@
 #ifndef BST_HPP
 # define BST_HPP
 
+#ifndef M_DEBUG
+# define M_DEBUG 0
+#endif
+
+#include "colors.hpp"
 #include "iterator_traits.hpp"
 #include "utils.hpp"
 #include <cstdio>
+
+/*https://iq.opengenus.org/implement-binary-search-tree-in-cpp/*/
 
 namespace ft{
 

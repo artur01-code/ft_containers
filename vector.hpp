@@ -1,12 +1,17 @@
 #ifndef VECTOR_HPP
 # define VECTOR_HPP
 
+#ifndef M_DEBUG
+# define M_DEBUG 0
+#endif
+
 #include <memory>
 #include <iostream>
 #include <stdexcept>
 #include <iterator>
 #include "vector_iterator.hpp"
 #include "utils.hpp"
+#include "colors.hpp"
 
 //https://www.youtube.com/watch?v=YpNCBw-cPWw
 
@@ -565,25 +570,25 @@ namespace ft {
 			}
 
 /*----------OPERATORS-------------*/
-			//not sure if they should be non member operators
-			int& operator[](int index)
-			{
-				if (M_DEBUG)
-					std::cout << COLOR_YELLOW << "Vector []-overload" << COLOR_DEFAULT << std::endl;
-				return (_array[index]);
-			}
 
-			bool operator==(const vector& rhs) const
-			{
-				if (M_DEBUG)
-					std::cout << COLOR_YELLOW << "Vector ==operator" << COLOR_DEFAULT << std::endl;
-				if (size() != rhs.size())
-					return (false);
-				for (int i = 0; i < size(); ++i)
-					if (_array[i] != rhs._array[i])
-						return (false);
-				return (true);
-			}
+			// int& operator[](int index)
+			// {
+			// 	if (M_DEBUG)
+			// 		std::cout << COLOR_YELLOW << "Vector []-overload" << COLOR_DEFAULT << std::endl;
+			// 	return (_array[index]);
+			// }
+
+			// bool operator==(const vector& rhs) const
+			// {
+			// 	if (M_DEBUG)
+			// 		std::cout << COLOR_YELLOW << "Vector ==operator" << COLOR_DEFAULT << std::endl;
+			// 	if (size() != rhs.size())
+			// 		return (false);
+			// 	for (int i = 0; i < size(); ++i)
+			// 		if (_array[i] != rhs._array[i])
+			// 			return (false);
+			// 	return (true);
+			// }
 
 			/* moved to non member operators
 			bool operator!=(const vector& rhs) const
@@ -608,7 +613,6 @@ namespace ft {
 	}; //class
 
 /*----------OPERATORS (non member)---------------------*/
-
 
 	template< class T, class Alloc >
 	bool operator!=( const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs ) 

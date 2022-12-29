@@ -1,7 +1,11 @@
 #ifndef BST_ITERATOR_HPP
 # define BST_ITERATOR_HPP
 
+#ifndef M_DEBUG
+# define M_DEBUG 0
+#endif
 
+#include "colors.hpp"
 #include "iterator_traits.hpp"
 #include "utils.hpp"
 #include "BST.hpp"

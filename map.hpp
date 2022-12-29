@@ -1,6 +1,11 @@
 #ifndef MAP_HPP
 # define MAP_HPP
 
+#ifndef M_DEBUG
+# define M_DEBUG 0
+#endif
+
+#include "colors.hpp"
 #include "utils.hpp"
 #include "vector.hpp"
 #include "iterator_traits.hpp"

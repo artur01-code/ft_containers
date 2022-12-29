@@ -1,8 +1,13 @@
 #ifndef VECTOR_ITERATOR
 # define VECTOR_ITERATOR
 
+#ifndef M_DEBUG
+# define M_DEBUG 0
+#endif
+
 #include <iostream>
 #include <cstddef>
+#include "colors.hpp"
 // #include "utils.hpp"
 #include "iterator_traits.hpp"
 
