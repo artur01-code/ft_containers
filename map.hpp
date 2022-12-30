@@ -35,6 +35,7 @@ namespace ft
 			typedef const ft::BST_iter<Key, T>					const_iterator;
 			typedef ft::reverse_BST_iter<Key, T>				reverse_iterator;
 			typedef const ft::reverse_BST_iter<Key, T>			const_reverse_iterator;
+			typedef typename BST<key_type, mapped_type>::node	node;
 
 		private:
 
@@ -258,22 +259,54 @@ namespace ft
 			/* Removes from the map container a single element.*/
 			void erase(iterator pos)
 			{
+				if (M_DEBUG)
+					std::cout << COLOR_YELLOW << "Map erase by iterator" << COLOR_DEFAULT << std::endl;
 				_bst._erase((*pos).first);
 			}
 
 			/* Removes from the map container a range of elements ([first,last)).*/
 			void erase(iterator first, iterator last)
 			{
-				for(; first != last; first++)
+				if (M_DEBUG)
+					std::cout << COLOR_YELLOW << "Map erase by range" << COLOR_DEFAULT << std::endl;
+				// while (first != last)
+				// {
+				// 	key_type key = (*first).first;
+				// 	erase(key);
+				// 	first++;
+				// }
+				while (first != last)
 				{
-					key_type key = (*first).first;
-					erase(key);
+					// std::cout << "key: " << (*first++).first << std::endl;
+					// _bst._erase((*first++).first);
+					_bst._erase((*first).first);
+					*first++; //zeigen die aufeinander? im Kreis? FML
+					// std::cout << "next one" << std::endl;
 				}
 			}
 
 			size_type erase(const key_type& key)
 			{
-				return (_bst._erase(key));
+				if (M_DEBUG)
+					std::cout << COLOR_YELLOW << "Map erase by key" << COLOR_DEFAULT << std::endl;
+				if (_bst._findNode(key))
+				{
+					_bst._erase(key);
+					return (1);
+				}
+				return (0);
+
+				// return (_bst._erase(key));
+				
+				/*
+				node*	tmp = _bst._findNode(key);
+				if (tmp)
+				{
+					_bst._erase(key);
+					return (1);
+				}
+				return (0);
+				*/
 			}
 
 			void swap(map& other)

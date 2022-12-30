@@ -229,7 +229,10 @@ namespace ft{
 
 			node* _findNode(const key_type& key) const
 			{
+				if (M_DEBUG)
+					std::cout << COLOR_YELLOW << "BST _findNode" << COLOR_DEFAULT << std::endl;
 				node* res = _bst;
+				//something is wrong with the value key
 				for (; res != NULL && extract_key(res->data) != key;)
 				{
 					if (_comp(key, extract_key(res->data)))
@@ -275,6 +278,8 @@ namespace ft{
 
 			void _deleteNode(node* bst)
 			{
+				if (M_DEBUG)
+					std::cout << COLOR_YELLOW << "BST _deleteNode" << COLOR_DEFAULT << std::endl;
 				node* tmp = NULL;
 				if(!bst)
 					return ;
@@ -291,8 +296,11 @@ namespace ft{
 				}
 			}
 
-			size_type _erase(const key_type &key)
-			{	
+			size_type _erase(const Key &key)
+			{
+				if (M_DEBUG)
+					std::cout << COLOR_YELLOW << "BST _erase" << COLOR_DEFAULT << std::endl;
+				std::cout << "key: " << &key << std::endl;
 				node*	found = _findNode(key);
 				if(!_bst || !found)
 					return (0);
@@ -304,6 +312,8 @@ namespace ft{
 	template <class value>
 	value extract_key(value v)
 	{
+		if (M_DEBUG)
+			std::cout << COLOR_YELLOW << "BST extract_key" << COLOR_DEFAULT << std::endl;
 		return (v);
 	}
 
