@@ -371,6 +371,8 @@ namespace ft {
 			//erase by index
 			iterator erase(iterator position) 
 			{
+				if (M_DEBUG)
+					std::cout << COLOR_YELLOW << "vector erase by index" << COLOR_DEFAULT << std::endl;
 				size_type pos_counter = 0;
 				for (iterator it = this->begin(); it != position; it++)
 					pos_counter++;
@@ -390,6 +392,8 @@ namespace ft {
 			//earse a range
 			iterator erase(iterator first, iterator last) 
 			{
+				if (M_DEBUG)
+					std::cout << COLOR_YELLOW << "vector erase by range" << COLOR_DEFAULT << std::endl;
 				iterator tmp = first;
 				difference_type tmp_size = last - first;
 				while (first != this->end())
@@ -419,20 +423,20 @@ namespace ft {
 			void resize(size_type n, value_type val = value_type())
 			{
 				if (M_DEBUG)
-					std::cout << COLOR_YELLOW << "Vector rezize" << std::endl;
-				if (n < _size)
-					for (size_type i = n - 1; i < _size; i++)
-						_alloc.destroy(&(_array[i]));
-				else if (n > _size)
-					for (size_type i = _size; i < n; i++)
-						_alloc.construct(&(_array[i]), val);
-				else if (n > _capacity)
+					std::cout << COLOR_YELLOW << "Vector resize" << std::endl;
+				if (n > _capacity)
 				{
 					size_type tmp_capacity = _capacity;
 					while (tmp_capacity < n)
 						tmp_capacity *= 2;
 					realloc(tmp_capacity, val);
 				}
+				else if (n > _size)
+					for (size_type i = _size; i < n; i++)
+						_alloc.construct(&(_array[i]), val);
+				else if (n < _size)
+					for (size_type i = n - 1; i < _size; i++)
+						_alloc.destroy(&(_array[i]));
 				_size = n;
 			}
 

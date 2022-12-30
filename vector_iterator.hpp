@@ -8,7 +8,7 @@
 #include <iostream>
 #include <cstddef>
 #include "colors.hpp"
-// #include "utils.hpp"
+#include "utils.hpp"
 #include "iterator_traits.hpp"
 
 namespace ft
@@ -31,18 +31,18 @@ namespace ft
 			pointer base() const { return (_ptr); }
 
 
-/*------VECTOR ITERATOR CONSTRUCTORS------*/
+/*----------VECTOR ITERATOR CONSTRUCTORS----------------------------*/
 		public:
 			vector_iterator(void) : _ptr(NULL) {}
 			vector_iterator(pointer ptr) : _ptr(ptr) {}
-
-			// template<typename _T>
-			// vector_iterator(const vector_iterator<_T, typename ft::enable_if<ft::are_same<_T, typename Container::pointer>::value, Container>::type>& copy) : _ptr(copy.base()) {}
-
 			vector_iterator(const vector_iterator &copy) : _ptr(copy.base()) {}
+
+			template<typename _T>
+			vector_iterator(const vector_iterator<_T, typename ft::enable_if<ft::are_same<_T, typename Container::pointer>::value, Container>::type>& copy) : _ptr(copy.base()) {}
+
 			~vector_iterator() {}
 
-//---------------VECTOR ITERATOR OPERATOR OVERLOADS----------------------------------------
+/*---------------VECTOR ITERATOR OPERATOR OVERLOADS----------------------------------------*/
 
             reference operator*(void) const 
             { 
