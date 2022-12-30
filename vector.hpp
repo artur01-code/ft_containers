@@ -145,8 +145,10 @@ namespace ft {
 			iterator end(void) { return(iterator(_array + _size)); }
 			const_iterator begin(void) const { return( const_iterator(_array)); }
 			const_iterator end(void) const { return(const_iterator(_array + _size)); }
-			//reverse_iterator [...]
-
+			reverse_iterator rbegin(void) { return(reverse_iterator(_array + _size )); }
+			const_reverse_iterator rbegin(void) const { return(const_reverse_iterator(_array + _size)); }
+			reverse_iterator rend(void) { return(reverse_iterator(_array)); }
+			const_reverse_iterator rend(void) const { return(const_reverse_iterator(_array)); }
 
 /*----------FUNCTIONS---------------------*/
 
