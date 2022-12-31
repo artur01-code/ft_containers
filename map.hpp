@@ -279,8 +279,10 @@ namespace ft
 				{
 					// std::cout << "key: " << (*first++).first << std::endl;
 					// _bst._erase((*first++).first);
-					_bst._erase((*first).first);
-					*first++; //zeigen die aufeinander? im Kreis? FML
+					// _bst._erase((*first).first);
+					std::cout << "pointer: " << first.getPtr() << std::endl;
+					_bst._deleteNode(first++.getPtr());
+					// first++; //zeigen die aufeinander? im Kreis? FML
 					// std::cout << "next one" << std::endl;
 				}
 			}

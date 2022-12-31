@@ -135,6 +135,8 @@ namespace ft{
 
 			node* minNode(node* bst) const
 			{
+				if (M_DEBUG)
+					std::cout << COLOR_YELLOW << "BST minNode" << COLOR_DEFAULT << std::endl;
 				node* current = bst;
 				while (current && current->left != NULL)
 					current = current->left;
@@ -143,6 +145,8 @@ namespace ft{
 
 			node* 	maxNode(node* bst) const
 			{
+				if (M_DEBUG)
+					std::cout << COLOR_YELLOW << "BST maxNode" << COLOR_DEFAULT << std::endl;
 				node* current = bst;
 				while (current && current->right != NULL)
 					current = current->right;
@@ -276,10 +280,137 @@ namespace ft{
 				_alloc.construct(&(curr->data), val);
 			}
 
+/*HELPER FOR DELETENODE*/
+			node* getPredecessor(node* node_val)
+			{
+				if (M_DEBUG)
+					std::cout << COLOR_YELLOW << "BST getPredecessor" << COLOR_DEFAULT << std::endl;
+				if (node_val->left != NULL)
+					return (maxNode(node_val->left));
+				else
+				{
+					node* parent = node_val->parent;
+					while (parent != NULL && node_val == parent->left)
+					{
+						node_val = parent;
+						parent = parent->parent;
+					}
+					node_val = parent;
+				}
+				return node_val;
+			}
+
+			node* getSuccessor(node* node_val) 
+			{
+				if (M_DEBUG)
+					std::cout << COLOR_YELLOW << "BST getSuccessor" << COLOR_DEFAULT << std::endl;
+				if (node_val->right != NULL)
+					return minNode(node_val->right);
+				else 
+				{
+					node* parent = node_val->parent;
+					while (parent != NULL && node_val == parent->right) 
+					{
+						node_val = parent;
+						parent = parent->parent;
+					}
+					node_val = parent;
+				}
+				return node_val;
+			}
+
+			static bool swapNodeValue(node* node1, node* node2) 
+			{
+				if (M_DEBUG)
+					std::cout << COLOR_YELLOW << "BST swapNodeValue" << COLOR_DEFAULT << std::endl;	
+				node* parent1 = node1->parent;
+				node* node1Left = node1->left;
+				node* node1Right = node1->right;
+				node* parent2 = node2->parent;
+				node* node2Left = node2->left;
+				node* node2Right = node2->right;
+
+				if (parent1 != NULL && parent1->left == node1)
+					parent1->left = node2;
+				else if (parent1 != NULL)
+					parent1->right = node2;
+				node2->parent = parent1;
+
+				if (parent2 != NULL && parent2->left == node2)
+					parent2->left = node1;
+				else if (parent2 != NULL)
+					parent2->right = node1;
+				if (parent2 != node1)
+					node1->parent = parent2;
+				else
+					node1->parent = node2;
+
+				if (node1Left == node2) {
+					node2->left = node1;
+					node2->right = node1Right;
+				} else if (node1Right == node2) {
+					node2->right = node1;
+					node2->left = node1Left;
+				} else {
+					node2->left = node1Left;
+					node2->right = node1Right;
+				}
+
+				if (node1Right && node1Right != node2)
+					node1Right->parent = node2;
+				if (node1Left && node1Left != node2)
+					node1Left->parent = node2;
+
+				node1->left = node2Left;
+				if (node2Left)
+					node2Left->parent = node1;
+				node1->right = node2Right;
+				if (node2Right)
+					node2Right->parent = node1;
+				
+				if (parent1 == NULL)
+					return false;
+				return true;
+			}
+
+			void deleteLeaf(node* to_delete) {
+
+				if (to_delete == NULL)
+					return;
+				node* parent = to_delete->parent;
+				if (parent == NULL)
+					_bst = NULL;
+				else if (to_delete == parent->left)
+					parent->left = NULL;
+				else if (to_delete == parent->right)
+					parent->right = NULL;
+				_node_alloc.destroy(to_delete);
+				_node_alloc.deallocate(to_delete, 1);
+				this->_size--;
+			}
+
 			void _deleteNode(node* bst)
 			{
 				if (M_DEBUG)
 					std::cout << COLOR_YELLOW << "BST _deleteNode" << COLOR_DEFAULT << std::endl;
+				if (!bst)
+					return ;
+				if ((!bst->left) && (!bst->right)) //then it's a leaf
+					deleteLeaf(bst); //_clear(bst);
+				else
+				{
+					node* next;
+					if (bst->left)
+						next = getPredecessor(bst);
+					else
+						next = getSuccessor(bst);
+					if (!swapNodeValue(bst, next))
+						_bst = next;
+					_deleteNode(bst);
+				}
+
+				
+				/*
 				node* tmp = NULL;
 				if(!bst)
 					return ;
@@ -293,7 +424,7 @@ namespace ft{
 						tmp = minNode(bst->right); 
 					changeData(bst, tmp->data);
 					_deleteNode(tmp);
-				}
+				}*/
 			}
 
 			size_type _erase(const Key &key)
