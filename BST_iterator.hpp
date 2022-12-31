@@ -270,27 +270,38 @@ namespace ft
 /*--------CONSTRUCTORS-----------------------------------*/
 		public:
 
+			//default constructor
 			reverse_BST_iter(): _p(NULL), _first(NULL), _last(NULL)
 			{
-
+				if (M_DEBUG)
+					std::cout << COLOR_YELLOW << "reverse_BST_iter default constructor" << COLOR_DEFAULT << std::endl;
 			}
 
 			reverse_BST_iter(BST_node nd, BST_node f = NULL, BST_node l = NULL): _p(nd), _first(f), _last(l)
 			{
-
+				if (M_DEBUG)
+					std::cout << COLOR_YELLOW << "reverse_BST_iter constructor with arguments" << COLOR_DEFAULT << std::endl;
 			}
 			
-			~reverse_BST_iter()
-			{
-
-			}
-
 			reverse_BST_iter(const reverse_BST_iter& it) : _p(it._p), _first(it._first), _last(it._last)
 			{
-
+				if (M_DEBUG)
+					std::cout << COLOR_YELLOW << "reverse_BST_iter copy constructor" << COLOR_DEFAULT << std::endl;
 			}
+
+			~reverse_BST_iter()
+			{
+				if (M_DEBUG)
+					std::cout << COLOR_YELLOW << "reverse_BST_iter destructor" << COLOR_DEFAULT << std::endl;
+			}
+
 		
 /*-----------GETTER------------------------------*/
+
+			BST_node base() const 
+			{
+				return (_p);
+			}
 
 			BST_node getPtr() const 
 			{
