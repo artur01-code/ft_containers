@@ -431,7 +431,6 @@ namespace ft{
 			{
 				if (M_DEBUG)
 					std::cout << COLOR_YELLOW << "BST _erase" << COLOR_DEFAULT << std::endl;
-				std::cout << "key: " << &key << std::endl;
 				node*	found = _findNode(key);
 				if(!_bst || !found)
 					return (0);
