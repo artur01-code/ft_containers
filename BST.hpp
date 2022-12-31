@@ -249,14 +249,14 @@ namespace ft{
 
 			node* _insert(const value_type& value)
 			{
+				if (M_DEBUG)
+					std::cout << COLOR_YELLOW << "BST _insert" << COLOR_DEFAULT << std::endl;
 				if (!_bst)
 				{
 					_bst = _new_node(value);
 					return (_bst);
-				}
-				// std::cout << COLOR_RED << "value: " << value.first << COLOR_DEFAULT << std::endl;
+				}			
 				node* found = _findNode(value.first);
-				// std::cout << COLOR_RED << "found: " << found << COLOR_DEFAULT << std::endl;
 				if (found)
 					return (found);
 				node* tmp = NULL;
@@ -269,7 +269,6 @@ namespace ft{
 					else
 						found = found->right;
 				}
-				// std::cout << "new_node whithout !_bst" << std::endl;
 				found = _new_node(value, tmp);
 				if (value.first < tmp->data.first)
 					tmp->left = found;

@@ -9,12 +9,11 @@
 #include "iterator_traits.hpp"
 #include "utils.hpp"
 #include "BST.hpp"
-#include <iterator>
 
 namespace ft
 {
 	template <typename key, typename T>
-	class BST_iter // : public std::iterator<std::bidirectional_iterator_tag, T>
+	class BST_iter : public std::iterator<std::bidirectional_iterator_tag, T>
 	{
 		public:
 			typedef key		 									key_type;
@@ -252,7 +251,7 @@ namespace ft
 /*----------REVERSITERATOR--------------------------------------------------*/
 
 	template <typename key, typename T>
-	class reverse_BST_iter //: public std::iterator<std::bidirectional_iterator_tag, T>
+	class reverse_BST_iter : public std::iterator<std::bidirectional_iterator_tag, T>
 	{
 		public:
 			typedef key											key_type;

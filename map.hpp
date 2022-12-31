@@ -437,7 +437,7 @@ namespace ft
 	{
 		if (M_DEBUG)
 			std::cout << COLOR_YELLOW << "Map operator!=" << COLOR_DEFAULT << std::endl;
-		return !(lhs == rhs);
+		return (!(lhs == rhs));
 	}
 
 	template< class Key, class T, class Compare, class Alloc >
@@ -453,7 +453,7 @@ namespace ft
 	{
 		if (M_DEBUG)
 			std::cout << COLOR_YELLOW << "Map operator<=" << COLOR_DEFAULT << std::endl;
-		return !(rhs < lhs);
+		return (!(rhs < lhs));
 	}
 
 	template< class Key, class T, class Compare, class Alloc >
@@ -461,7 +461,7 @@ namespace ft
 	{
 		if (M_DEBUG)
 			std::cout << COLOR_YELLOW << "Map operator>" << COLOR_DEFAULT << std::endl;
-		return !(lhs < rhs);
+		return (lhs < rhs);
 	}
 
 	template< class Key, class T, class Compare, class Alloc >
@@ -469,7 +469,7 @@ namespace ft
 	{
 		if (M_DEBUG)
 			std::cout << COLOR_YELLOW << "Map operator>=" << COLOR_DEFAULT << std::endl;
-		return (lhs > rhs);
+		return (!(lhs < rhs));
 	}
 
 } //namespace end
