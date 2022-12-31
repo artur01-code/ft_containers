@@ -236,6 +236,21 @@ namespace ft
 			 size by the number of elements inserted.*/
 			ft::pair<iterator, bool> insert(const value_type& value)
 			{
+				if (M_DEBUG)
+					std::cout << COLOR_YELLOW << "Map insert with value" << COLOR_DEFAULT << std::endl;
+
+				/*	
+				ft::pair<iterator, bool> tmp;
+				if (_bst.checkKey(value.first, _bst.getRoot()))
+					tmp.second = false;
+				else
+					tmp.second = true;
+				tmp.first = iterator(_bst._insert(value));
+				return (tmp);
+				*/
+
+				// if (value)
+				// 	return (ft::make_pair(iterator(), false));
 				iterator it(_bst._insert(value));
 				if (it != iterator())
 					return (ft::make_pair(it, true));
@@ -245,13 +260,24 @@ namespace ft
 
 			iterator insert(iterator hint, const value_type& value)
 			{
+				if (M_DEBUG)
+					std::cout << COLOR_YELLOW << "Map insert with hint" << COLOR_DEFAULT << std::endl;
+				(void) hint; //useless
+				iterator it = find(value.first);
+				if (it != end())
+					return (it);
+				return (iterator(_bst._insert(value), _bst.getRoot()));
+				
+				/*
 				if (hint != iterator())
 					return (this->_bst._insert(value));
-				return (iterator());
+				return (iterator());*/
 			}
 
 			template< class InputIt > void insert(InputIt first, InputIt last)
 			{
+				if (M_DEBUG)
+					std::cout << COLOR_YELLOW << "Map insert by range" << COLOR_DEFAULT << std::endl;
 				for(; first != last; first++)
 					_bst._insert(*first);
 			}

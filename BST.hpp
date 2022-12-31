@@ -249,18 +249,22 @@ namespace ft{
 
 			node* _insert(const value_type& value)
 			{
-				if(!_bst){
+				// if (value != NULL)
+				// 	return (NULL);
+				if (!_bst)
+				{
 					_bst = _new_node(value);
 					return (_bst);
 				}
 				node* found;
 				node* tmp;
 				found = _findNode(value.first);
-				if(found)
+				if (found)
 					return (found);
 				tmp = NULL;
 				found = _bst;
-				while(found != NULL){
+				while (found != NULL)
+				{
 					tmp = found;
 					if(value.first < found->data.first)
 						found = found->left;
@@ -268,7 +272,7 @@ namespace ft{
 						found = found->right;
 				}
 				found = _new_node(value, tmp);
-				if(value.first < tmp->data.first)
+				if (value.first < tmp->data.first)
 					tmp->left = found;
 				else
 					tmp->right = found;
@@ -437,6 +441,30 @@ namespace ft{
 				_deleteNode(found);
 				return (1);
 			}
+
+			bool checkKey(const key_type &data, node* curr) const 
+			{	
+				if (curr == NULL)
+					return false;
+				if (curr->data.first == data)
+					return true;
+				else if (curr->data.first <= data)
+					return checkKey(data, curr->right);
+				else
+					return checkKey(data, curr->left);
+			}
+
+/*---------------OPERATOR OVERLOAD----------------------*/
+			bool operator==(const BST& rhs)
+			{
+				return (this->getRoot == rhs.getRoot());
+			}
+			
+			bool operator!=(const BST& rhs)
+			{
+				return !(this->getRoot() == rhs.getRoot());
+			}
+
 	}; //class
 
 	template <class value>
