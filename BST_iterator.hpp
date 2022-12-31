@@ -35,22 +35,33 @@ namespace ft
 
 			BST_iter(): _p(NULL), _first(NULL), _last(NULL)
 			{
-
+				if (M_DEBUG)
+					std::cout << COLOR_RED << "BST_ITER default constructor" << COLOR_DEFAULT << std::endl; 
 			}
 
 			BST_iter(BST_node nd, BST_node f = NULL, BST_node l = NULL): _p(nd), _first(f), _last(l)
 			{
-
+				if (M_DEBUG)
+					std::cout << COLOR_RED << "BST_ITER constructor with arguments" << COLOR_DEFAULT << std::endl; 
 			}
+
+			// template<typename n_ptr, typename v_type>
+			// BST_iter(const BST_iter<n_ptr, v_type> &copy) : _p(copy._p), _first(copy._first), _last(copy._last)
+			// {
+			// 	if (M_DEBUG)
+			// 		std::cout << COLOR_RED << "BST_ITER constructor with template" << COLOR_DEFAULT << std::endl;
+			// }
 			
 			~BST_iter()
 			{
-
+				if (M_DEBUG)
+					std::cout << COLOR_RED << "BST_ITER destructor" << COLOR_DEFAULT << std::endl; 
 			}
 
 			BST_iter(const BST_iter& it) : _p(it._p), _first(it._first), _last(it._last) 
 			{
-
+				if (M_DEBUG)
+					std::cout << COLOR_RED << "BST_ITER copy constructor" << COLOR_DEFAULT << std::endl; 
 			}
 	
 /*-----------GETTER-------------------------------*/
@@ -74,6 +85,8 @@ namespace ft
 
 			BST_iter& operator=(const BST_iter& other)
 			{
+				if (M_DEBUG)
+					std::cout << COLOR_RED << "BST_ITER assigment operator" << COLOR_DEFAULT << std::endl; 
 				_p = other.getPtr();
 				_first = other.getf();
 				_last = other.getl();
@@ -82,6 +95,8 @@ namespace ft
 
 			const BST_iter& operator=(const BST_iter& other) const
 			{
+				if (M_DEBUG)
+					std::cout << COLOR_RED << "BST_ITER const assigment operator" << COLOR_DEFAULT << std::endl; 
 				_p = other.getPtr();
 				_first = other.getf();
 				_last = other.getl();

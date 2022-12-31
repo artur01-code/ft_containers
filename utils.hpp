@@ -210,8 +210,10 @@ namespace ft {
 
 
 	template< class InputIt1, class InputIt2 >
-	bool lexicographical_compare( InputIt1 first1, InputIt1 last1, InputIt2 first2, InputIt2 last2 ) {
-		
+	bool lexicographical_compare( InputIt1 first1, InputIt1 last1, InputIt2 first2, InputIt2 last2 ) 
+	{
+		if (M_DEBUG)
+			std::cout << COLOR_YELLOW << "lexicographical_compare" << COLOR_DEFAULT << std::endl;
 		while ((first1 != last1) && (first2 != last2))
 		{
 			if (*first2 < *first1)

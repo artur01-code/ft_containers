@@ -238,8 +238,6 @@ namespace ft
 			{
 				if (M_DEBUG)
 					std::cout << COLOR_YELLOW << "Map insert with value" << COLOR_DEFAULT << std::endl;
-
-				/*	
 				ft::pair<iterator, bool> tmp;
 				if (_bst.checkKey(value.first, _bst.getRoot()))
 					tmp.second = false;
@@ -247,15 +245,6 @@ namespace ft
 					tmp.second = true;
 				tmp.first = iterator(_bst._insert(value));
 				return (tmp);
-				*/
-
-				// if (value)
-				// 	return (ft::make_pair(iterator(), false));
-				iterator it(_bst._insert(value));
-				if (it != iterator())
-					return (ft::make_pair(it, true));
-				else
-					return (ft::make_pair(it, false));
 			}
 
 			iterator insert(iterator hint, const value_type& value)
@@ -436,6 +425,8 @@ namespace ft
 	template< class Key, class T, class Compare, class Alloc >
 	bool operator==(const map<Key,T,Compare,Alloc>& lhs, const map<Key,T,Compare,Alloc>& rhs)
 	{
+		if (M_DEBUG)
+			std::cout << COLOR_YELLOW << "Map operator==" << COLOR_DEFAULT << std::endl;
 		if (lhs.size() != rhs.size())
 			return (false);
 		return (ft::equal(lhs.begin(), lhs.end(), rhs.begin()));
@@ -444,30 +435,40 @@ namespace ft
 	template< class Key, class T, class Compare, class Alloc >
 	bool operator!=(const map<Key,T,Compare,Alloc>& lhs, const map<Key,T,Compare,Alloc>& rhs)
 	{
+		if (M_DEBUG)
+			std::cout << COLOR_YELLOW << "Map operator!=" << COLOR_DEFAULT << std::endl;
 		return !(lhs == rhs);
 	}
 
 	template< class Key, class T, class Compare, class Alloc >
 	bool operator<(const map<Key,T,Compare,Alloc>& lhs, const map<Key,T,Compare,Alloc>& rhs)
 	{
+		if (M_DEBUG)
+			std::cout << COLOR_YELLOW << "Map operator<" << COLOR_DEFAULT << std::endl;
 		return (ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end())); 
 	}
 
 	template< class Key, class T, class Compare, class Alloc >
 	bool operator<=(const map<Key,T,Compare,Alloc>& lhs, const map<Key,T,Compare,Alloc>& rhs)
 	{
+		if (M_DEBUG)
+			std::cout << COLOR_YELLOW << "Map operator<=" << COLOR_DEFAULT << std::endl;
 		return !(rhs < lhs);
 	}
 
 	template< class Key, class T, class Compare, class Alloc >
 	bool operator>(const map<Key,T,Compare,Alloc>& lhs, const map<Key,T,Compare,Alloc>& rhs)
 	{
+		if (M_DEBUG)
+			std::cout << COLOR_YELLOW << "Map operator>" << COLOR_DEFAULT << std::endl;
 		return !(lhs < rhs);
 	}
 
 	template< class Key, class T, class Compare, class Alloc >
 	bool operator>=(const map<Key,T,Compare,Alloc>& lhs, const map<Key,T,Compare,Alloc>& rhs)
 	{
+		if (M_DEBUG)
+			std::cout << COLOR_YELLOW << "Map operator>=" << COLOR_DEFAULT << std::endl;
 		return (lhs > rhs);
 	}
 

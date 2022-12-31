@@ -57,7 +57,8 @@ namespace ft{
 
 			BST():  _size(0),_bst(NULL)
 			{
-
+				if (M_DEBUG)
+					std::cout << COLOR_YELLOW << "BST default constructor" << COLOR_DEFAULT << std::endl;
 			}
 
 			BST& operator=(const BST& other)
@@ -236,7 +237,6 @@ namespace ft{
 				if (M_DEBUG)
 					std::cout << COLOR_YELLOW << "BST _findNode" << COLOR_DEFAULT << std::endl;
 				node* res = _bst;
-				//something is wrong with the value key
 				for (; res != NULL && extract_key(res->data) != key;)
 				{
 					if (_comp(key, extract_key(res->data)))
@@ -249,19 +249,17 @@ namespace ft{
 
 			node* _insert(const value_type& value)
 			{
-				// if (value != NULL)
-				// 	return (NULL);
 				if (!_bst)
 				{
 					_bst = _new_node(value);
 					return (_bst);
 				}
-				node* found;
-				node* tmp;
-				found = _findNode(value.first);
+				// std::cout << COLOR_RED << "value: " << value.first << COLOR_DEFAULT << std::endl;
+				node* found = _findNode(value.first);
+				// std::cout << COLOR_RED << "found: " << found << COLOR_DEFAULT << std::endl;
 				if (found)
 					return (found);
-				tmp = NULL;
+				node* tmp = NULL;
 				found = _bst;
 				while (found != NULL)
 				{
@@ -271,6 +269,7 @@ namespace ft{
 					else
 						found = found->right;
 				}
+				// std::cout << "new_node whithout !_bst" << std::endl;
 				found = _new_node(value, tmp);
 				if (value.first < tmp->data.first)
 					tmp->left = found;
