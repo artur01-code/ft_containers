@@ -583,9 +583,9 @@ namespace ft {
 					std::cout << COLOR_YELLOW << "Vector <<operator" << COLOR_DEFAULT << std::endl;
 				for (size_t i = 0; i < rhs._size; ++i)
 					ostr << rhs._array[i] << " ";
-				ostr << " | | ";
-				for (size_t i = rhs._size; i < rhs._capacity; ++i)
-					ostr << rhs._array[i] << " ";
+				// ostr << " | | ";
+				// for (size_t i = rhs._size; i < rhs._capacity; ++i)
+				// 	ostr << rhs._array[i] << " ";
 				ostr << std::endl;
 				return (ostr);
 			}

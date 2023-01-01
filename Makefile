@@ -3,6 +3,7 @@ NAME	= ft_containers
 SRCS_MAP	= tests/test_map.cpp
 SRCS_VEC	= tests/test_vector.cpp
 SRCS_STACK	= tests/test_stack.cpp
+SRCS_MAIN	= main.cpp
 
 SRCS_ALL	= $(SRCS_VEC) $(SRCS_MAP) $(SRCS_STACK)
 
@@ -22,6 +23,9 @@ map:
 
 stack:
 	${CC} ${SRCS_STACK} ${FLAGS} -o ${NAME}
+
+main:
+	${CC} ${SRCS_MAIN} ${FLAGS} -o ${NAME}
 
 debug: all
 			${CC} ${SRCS_ALL} ${FLAGS} -D M_DEBUG=1 -o ${NAME}

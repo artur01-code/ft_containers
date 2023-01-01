@@ -36,7 +36,7 @@ int main(void)
 		vec_ori.push_back(i);
 	for (std::vector<int>::iterator iter = vec_ori.begin(); iter != vec_ori.end(); iter++)
 		std::cout << *iter << " ";
-	std::cout << " | | " << std::endl;
+	std::cout << std::endl;
 
 	/*-----VEC_OWN pushback 10 times-----*/
 	std::cout << COLOR_GREEN << "push_back 10 times" << COLOR_DEFAULT << std::endl;
@@ -94,7 +94,7 @@ int main(void)
 	vec_ori.insert(it_ori, 42);
 	for (std::vector<int>::iterator iter = vec_ori.begin(); iter != vec_ori.end(); iter++)
 		std::cout << *iter << " ";
-	std::cout << " | | " << std::endl;
+	std::cout << std::endl;
 
 
 	/*-----VEC_OWN insert() by index-----*/
@@ -115,7 +115,7 @@ int main(void)
 	vec_ori.insert(it_ori, 10, 21);
 	for (std::vector<int>::iterator iter = vec_ori.begin(); iter != vec_ori.end(); iter++)
 		std::cout << *iter << " ";
-	std::cout << " | | " << std::endl;
+	std::cout << std::endl;
 
 
 	/*-----VEC_OWN insert() by index with n-----*/
@@ -137,7 +137,7 @@ int main(void)
 	vec_ori.insert(it_ori, myarray, myarray + 4);
 	for (std::vector<int>::iterator iter = vec_ori.begin(); iter != vec_ori.end(); iter++)
 		std::cout << *iter << " ";
-	std::cout << " | | " << std::endl;
+	std::cout << std::endl;
 
 
 	/*-----VEC_OWN insert() index by range-----*/
@@ -158,7 +158,7 @@ int main(void)
 	vec_ori.erase(it_ori);
 	for (std::vector<int>::iterator iter = vec_ori.begin(); iter != vec_ori.end(); iter++)
 		std::cout << *iter << " ";
-	std::cout << " | | " << std::endl;
+	std::cout << std::endl;
 
 
 	/*-----VEC_OWN erase()-----*/
@@ -179,7 +179,7 @@ int main(void)
 	vec_ori.erase(it_ori_start, it_ori_end);
 	for (std::vector<int>::iterator iter = vec_ori.begin(); iter != vec_ori.end(); iter++)
 		std::cout << *iter << " ";
-	std::cout << " | | " << std::endl;
+	std::cout << std::endl;
 
 
 	/*-----VEC_OWN erase() with range -----*/
@@ -197,7 +197,7 @@ int main(void)
 	vec_ori.pop_back();
 	for (std::vector<int>::iterator iter = vec_ori.begin(); iter != vec_ori.end(); iter++)
 		std::cout << *iter << " ";
-	std::cout << " | | " << std::endl;
+	std::cout << std::endl;
 
 	/*-----VEC_OWN pop_back()-----*/
 	std::cout << COLOR_GREEN << "pop_back()" << COLOR_DEFAULT << std::endl;
@@ -247,7 +247,7 @@ int main(void)
 	vec_ori.resize(10);
 	for (std::vector<int>::iterator iter = vec_ori.begin(); iter != vec_ori.end(); iter++)
 		std::cout << *iter << " ";
-	std::cout << " | | " << std::endl;
+	std::cout << std::endl;
 
 
 	/*-----VEC_OWN vec_own.resize(10)-----*/
@@ -291,7 +291,7 @@ int main(void)
 	vec_ori.assign(array, array + 8);
 	for (std::vector<int>::iterator iter = vec_ori.begin(); iter != vec_ori.end(); iter++)
 		std::cout << *iter << " ";
-	std::cout << " | | " << std::endl;
+	std::cout << std::endl;
 
 
 	/*-----VEC_OWN assign()-----*/
@@ -301,12 +301,47 @@ int main(void)
 
 /*---------------------------------------------------------------------------------------------------*/
 	std::cout << std::endl << std::string(60, '-') << std::endl;
+
+	std::vector<int> tmp_ori;
+	for (int i = 99; i > 90; i--)
+		tmp_ori.push_back(i);
+	std::cout << "tmp_ori:" << std::endl;
+	for (std::vector<int>::iterator iter = tmp_ori.begin(); iter != tmp_ori.end(); iter++)
+		std::cout << *iter << " ";
+	std::cout << std::endl;
+
+	ft::vector<int> tmp_own;
+	for (int i = 99; i > 90; i--)
+		tmp_own.push_back(i);
+	std::cout << "tmp_own:" << std::endl;
+	print_varray(tmp_own);
+
+	/*-----VEC_ORI swap()-----*/
+	std::cout << COLOR_RED << "swap()" << COLOR_DEFAULT << std::endl;
+	vec_ori.swap(tmp_ori);
+	for (std::vector<int>::iterator iter = vec_ori.begin(); iter != vec_ori.end(); iter++)
+		std::cout << *iter << " ";
+	std::cout << std::endl;
+	std::cout << "\ntmp_ori:" << std::endl;
+	for (std::vector<int>::iterator iter = tmp_ori.begin(); iter != tmp_ori.end(); iter++)
+		std::cout << *iter << " ";
+	std::cout << "\n" << std::endl;
+
+	/*-----VEC_OWN swap()-----*/
+	std::cout << COLOR_GREEN << "swap()" << COLOR_DEFAULT << std::endl;
+	vec_own.swap(tmp_own);
+	print_varray(vec_own);
+	std::cout << "tmp_own:" << std::endl;
+	print_varray(tmp_own);
+
+/*---------------------------------------------------------------------------------------------------*/
+	std::cout << std::endl << std::string(60, '-') << std::endl;
 	/*-----VEC_ORI clear()-----*/
 	std::cout << COLOR_RED << "clear()" << COLOR_DEFAULT << std::endl;
 	vec_ori.clear();
 	for (std::vector<int>::iterator iter = vec_ori.begin(); iter != vec_ori.end(); iter++)
 		std::cout << *iter << " ";
-	std::cout << " | | " << std::endl;
+	std::cout << std::endl;
 
 	/*-----VEC_OWN clear()-----*/
 	std::cout << COLOR_GREEN << "clear()" << COLOR_DEFAULT << std::endl;
