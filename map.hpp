@@ -256,11 +256,6 @@ namespace ft
 				if (it != end())
 					return (it);
 				return (iterator(_bst._insert(value), _bst.getRoot()));
-				
-				/*
-				if (hint != iterator())
-					return (this->_bst._insert(value));
-				return (iterator());*/
 			}
 
 			template< class InputIt > void insert(InputIt first, InputIt last)
@@ -284,20 +279,9 @@ namespace ft
 			{
 				if (M_DEBUG)
 					std::cout << COLOR_YELLOW << "Map erase by range" << COLOR_DEFAULT << std::endl;
-				// while (first != last)
-				// {
-				// 	key_type key = (*first).first;
-				// 	erase(key);
-				// 	first++;
-				// }
 				while (first != last)
 				{
-					// std::cout << "key: " << (*first++).first << std::endl;
-					// _bst._erase((*first++).first);
-					// _bst._erase((*first).first);
 					_bst._deleteNode(first++.getPtr());
-					// first++; //zeigen die aufeinander? im Kreis? FML
-					// std::cout << "next one" << std::endl;
 				}
 			}
 
@@ -311,18 +295,6 @@ namespace ft
 					return (1);
 				}
 				return (0);
-
-				// return (_bst._erase(key));
-				
-				/*
-				node*	tmp = _bst._findNode(key);
-				if (tmp)
-				{
-					_bst._erase(key);
-					return (1);
-				}
-				return (0);
-				*/
 			}
 
 			void swap(map& other)

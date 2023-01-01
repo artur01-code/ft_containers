@@ -397,8 +397,8 @@ namespace ft{
 					std::cout << COLOR_YELLOW << "BST _deleteNode" << COLOR_DEFAULT << std::endl;
 				if (!bst)
 					return ;
-				if ((!bst->left) && (!bst->right)) //then it's a leaf
-					deleteLeaf(bst); //_clear(bst);
+				if ((!bst->left) && (!bst->right))
+					deleteLeaf(bst); 
 				else
 				{
 					node* next;
@@ -410,23 +410,6 @@ namespace ft{
 						_bst = next;
 					_deleteNode(bst);
 				}
-
-				
-				/*
-				node* tmp = NULL;
-				if(!bst)
-					return ;
-				if(_isLeaf(bst))
-					_clear(bst);
-				else if(!_isLeaf(bst))
-				{
-					if(bst->left)
-						tmp = maxNode(bst->left);
-					else if(bst->right)
-						tmp = minNode(bst->right); 
-					changeData(bst, tmp->data);
-					_deleteNode(tmp);
-				}*/
 			}
 
 			size_type _erase(const Key &key)

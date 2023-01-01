@@ -33,14 +33,31 @@ namespace ft
 
 /*----------VECTOR ITERATOR CONSTRUCTORS----------------------------*/
 		public:
-			vector_iterator(void) : _ptr(NULL) {}
-			vector_iterator(pointer ptr) : _ptr(ptr) {}
-			vector_iterator(const vector_iterator &copy) : _ptr(copy.base()) {}
+			vector_iterator(void) : _ptr(NULL) 
+			{
+
+			}
+
+			vector_iterator(pointer ptr) : _ptr(ptr) 
+			{
+
+			}
+
+			vector_iterator(const vector_iterator &copy) : _ptr(copy.base()) 
+			{
+
+			}
 
 			template<typename _T>
-			vector_iterator(const vector_iterator<_T, typename ft::enable_if<ft::are_same<_T, typename Container::pointer>::value, Container>::type>& copy) : _ptr(copy.base()) {}
+			vector_iterator(const vector_iterator<_T, typename ft::enable_if<ft::are_same<_T, typename Container::pointer>::value, Container>::type>& copy) : _ptr(copy.base()) 
+			{
 
-			~vector_iterator() {}
+			}
+
+			~vector_iterator() 
+			{
+				
+			}
 
 /*---------------VECTOR ITERATOR OPERATOR OVERLOADS----------------------------------------*/
 

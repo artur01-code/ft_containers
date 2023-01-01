@@ -43,13 +43,6 @@ namespace ft
 				if (M_DEBUG)
 					std::cout << COLOR_RED << "BST_ITER constructor with arguments" << COLOR_DEFAULT << std::endl; 
 			}
-
-			// template<typename n_ptr, typename v_type>
-			// BST_iter(const BST_iter<n_ptr, v_type> &copy) : _p(copy._p), _first(copy._first), _last(copy._last)
-			// {
-			// 	if (M_DEBUG)
-			// 		std::cout << COLOR_RED << "BST_ITER constructor with template" << COLOR_DEFAULT << std::endl;
-			// }
 			
 			~BST_iter()
 			{
@@ -211,12 +204,6 @@ namespace ft
 				return (tmp);
 			}
 
-			// BST_iter operator-=(int value)
-			// {
-			// 	for (; value != 0; value--)
-			// 		(*this)--;
-			// }
-
 			value_type* operator->()
 			{
 				return (&(_p->data));
@@ -375,12 +362,6 @@ namespace ft
 				}
 				return (*this);
 			}
-
-			// reverse_BST_iter operator-=(int value)
-			// {
-			// 	for (; value != 0; value--)
-			// 		(*this)--;
-			// }
 
 			reverse_BST_iter operator++(int)
 			{
